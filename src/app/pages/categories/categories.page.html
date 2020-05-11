@@ -3,10 +3,10 @@
     <div class="ion-padding">
         <div class="cat-cards-container">
             <!-- Component proposal -->
-            <ion-card class="cat-card-container i-padding">
+            <ion-card class="cat-card-container i-padding" *ngFor="let cat of categories">
                 <div class="card-title-container">
-                    <ion-card-title>Bussines tips</ion-card-title>
-                    <ion-card-subtitle>23 articles</ion-card-subtitle>
+                    <ion-card-title>{{cat.name}}</ion-card-title>
+                    <ion-card-subtitle>{{cat.parent}} articles</ion-card-subtitle>
                 </div>
             </ion-card>
         </div>
