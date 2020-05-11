@@ -1,0 +1,7 @@
+{
+  "name": "guiaNegociosApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
