@@ -17,7 +17,7 @@ export class WordpressApiService {
   /**
    * getCategories
    */
-  public async getCategories(): Categories[] {
+  public async getCategories(): Promise<Categories[]> {
     // Code goes here
     const res = await this.http$.get<Categories[]>(`${this.baseApiEndpoint}categories`).toPromise();
     return res;
