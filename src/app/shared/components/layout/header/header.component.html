@@ -1,14 +1,17 @@
 <ion-header>
     <ion-toolbar class="hc-toolbar-bg-color">
         <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
+            <ng-container *ngIf="toolTipType === 'main'">
+                <ion-menu-button class="ion-back-btn"></ion-menu-button>
+            </ng-container>
+            <ng-container *ngIf="toolTipType === 'page'">
+                <ion-back-button class="ion-back-btn" defaultHref="categories"></ion-back-button>
+            </ng-container>
         </ion-buttons>
         <div class="hc-slot-center">
             <ion-img src="assets/img/header-logo.png"></ion-img>
         </div>
         <div slot="end" style="width: 48px; height: 48px;">
-            <!-- <ion-label>Awesome Label</ion-label> -->
         </div>
-        <!-- <ion-title>{{pageNameTem}}</ion-title> -->
     </ion-toolbar>
 </ion-header>
