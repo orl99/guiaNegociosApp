@@ -28,4 +28,9 @@ export class WordpressApiService {
     const res = await this.http$.get<Post[]>(`${this.baseApiEndpoint}posts?_embed&categories=${cat}`).toPromise();
     return res;
   }
+
+  public async getPost(postID: number) {
+    const res = await this.http$.get<Post[]>(`${this.baseApiEndpoint}posts?_embed&include[]=${postID}`).toPromise();
+    return res;
+  }
 }

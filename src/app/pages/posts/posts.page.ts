@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 // Interfaces
 import { Post } from 'src/app/models/post.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -13,7 +13,8 @@ export class PostPage implements OnInit {
   category: number;
   allPosts: Post[];
   constructor(private wpService: WordpressApiService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
     route.params.subscribe((params) => {
       this.category = params['catId'];
     });
@@ -25,8 +26,8 @@ export class PostPage implements OnInit {
     this.allPosts = response;
   }
 
-  async goPost() {
-
+  async goPost(postId: number) {
+    this.router.navigate(['categories/post', postId]);
   }
 
 }

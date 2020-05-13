@@ -20,13 +20,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/posts/posts.module').then( m => m.PostsPageModule)
   },
   {
-    path: 'post',
+    path: 'categories/post/:postId',
     loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
-  },
-  // {
-  //   path: 'categories/:id',
-  //   loadChildren: () => import('./pages/categories/categories.module').then( m => m.CategoriesPageModule)
-  // },
+  }
 ];
 
 @NgModule({
