@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-select placeholder="Filter options by">
+      <!-- Taxonomis goes here -->
+      <ion-select-option>Angular</ion-select-option>
+      <ion-select-option>React</ion-select-option>
+    </ion-select>
+    <div class="cat-cards-container">
+      <!-- Component proposal -->
+      <ion-card class="cat-card-container i-padding" *ngFor="let post of allPosts" (click)="goPost(post.id)" 
+      [ngStyle]="{'background-image' : 'linear-gradient(to bottom, rgba(128, 128, 128, 0.01), rgba(128, 128, 128, 0.7)), url(' + post.featured_image_urls.medium_large + ')' }">
+          <div class="card-title-container">
+              <ion-card-title>{{post.title.rendered}}</ion-card-title>
+          </div>
+      </ion-card>
+  </div>
+  </div>
+</ion-content>

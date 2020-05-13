@@ -4,17 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PostPageRoutingModule } from './post-routing.module';
+import { PostPageRoutingModule } from './posts-routing.module';
 
-import { PostPage } from './post.page';
+import { PostPage } from './posts.page';
+
+// Modules
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PostPageRoutingModule
+    PostPageRoutingModule,
+    SharedModule
   ],
   declarations: [PostPage]
 })
-export class PostPageModule {}
+export class PostsPageModule {}

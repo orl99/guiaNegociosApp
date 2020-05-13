@@ -1,8 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { WordpressApiService } from 'src/app/services/wordpress-api.service';
-// Interfaces
-import { Post } from 'src/app/models/post.interface';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-post',
@@ -10,19 +6,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./post.page.scss'],
 })
 export class PostPage implements OnInit {
-  category: number;
-  postData: Post[];
-  constructor(private wpService: WordpressApiService,
-              private route: ActivatedRoute) {
-    route.params.subscribe((params) => {
-      this.category = params['catId'];
-    });
-  }
 
-  async ngOnInit() {
-    const response = await this.wpService.getPostsByCat(this.category);
-    console.log('Response', response);
+  constructor() { }
 
+  ngOnInit() {
   }
 
 }

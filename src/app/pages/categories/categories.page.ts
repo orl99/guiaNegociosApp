@@ -22,7 +22,7 @@ export class CategoriesPage implements OnInit {
   }
 
   goPostsByCat(catId: number) {
-    this.router.navigate(['categories/post/', catId]);
+    this.router.navigate(['categories/posts/', catId]);
   }
 
 }

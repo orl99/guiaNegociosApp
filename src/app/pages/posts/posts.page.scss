@@ -1,0 +1,15 @@
+.cat-card-container {
+    // background-image: linear-gradient(to bottom, rgba(128, 128, 128, 0.01), rgba(128, 128, 128, 0.7)), url('https://guiaparanegocios.net/wp-content/uploads/2020/04/negocios-en-linea.jpg');
+    background-size: cover;
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.card-title-container {
+    padding: 10px;
+    ion-card-subtitle,
+    ion-card-title {
+        color: white !important;
+    }
+}
