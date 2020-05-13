@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 // Models
 import { Categories } from 'src/app/models/categories.interface';
+import { Post } from '../models/post.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,9 @@ export class WordpressApiService {
     const res = await this.http$.get<Categories[]>(`${this.baseApiEndpoint}categories`).toPromise();
     return res;
   }
-  // public getCategories(): Observable<Categories[]> {
-  //   // Code goes here
-  //   return this.http$.get<Categories[]>(`${this.baseApiEndpoint}categories`);
-  // }
+
+  public async getPostsByCat(cat: number) {
+    const res = await this.http$.get<Post[]>(`${this.baseApiEndpoint}posts?_embed&categories=${cat}`).toPromise();
+    return res;
+  }
 }
