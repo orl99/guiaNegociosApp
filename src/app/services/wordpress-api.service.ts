@@ -12,6 +12,7 @@ import { Post } from '../models/post.interface';
 export class WordpressApiService {
 
   baseApiEndpoint = 'https://guiaparanegocios.net/wp-json/wp/v2/';
+  customApiEndpoint = 'https://guiaparanegocios.net/wp-json/custom_api/v1/';
 
   constructor(private http$: HttpClient) { }
 
@@ -20,7 +21,7 @@ export class WordpressApiService {
    */
   public async getCategories(): Promise<Categories[]> {
     // Code goes here
-    const res = await this.http$.get<Categories[]>(`${this.baseApiEndpoint}categories`).toPromise();
+    const res = await this.http$.get<Categories[]>(`${this.customApiEndpoint}categories`).toPromise();
     return res;
   }
 
