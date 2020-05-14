@@ -1,7 +1,10 @@
 <app-header headerType="page"></app-header>
 
 <ion-content>
-  <div class="ion-padding">
-    <div [innerHTML]="postHTML"></div>
-  </div>
+    <div class="post-main-container" *ngIf="!!mainImage">
+        <ion-img [src]="mainImage"></ion-img>
+    </div>
+    <div class="ion-padding">
+        <div [innerHTML]="postHTML"></div>
+    </div>
 </ion-content>

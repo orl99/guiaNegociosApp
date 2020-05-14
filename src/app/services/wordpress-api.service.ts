@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 // Models
 import { Categories } from 'src/app/models/categories.interface';
 import { Post } from '../models/post.interface';
+import { Tags } from '../models/tags.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class WordpressApiService {
 
   public async getPost(postID: number) {
     const res = await this.http$.get<Post[]>(`${this.baseApiEndpoint}posts?_embed&include[]=${postID}`).toPromise();
+    return res;
+  }
+
+  public async getTags() {
+    const res = await this.http$.get<Tags[]>(`${this.customApiEndpoint}tags`).toPromise();
     return res;
   }
 }
