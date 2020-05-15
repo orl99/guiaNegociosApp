@@ -9,8 +9,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+// Interceptor
+import { HttpLoaderInterceptor } from 'src/app/services/interceptors/httpLoaderInterceptor.interceptor';
+
 // Modules
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 // NGXS
@@ -19,9 +22,11 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // import { NameState } from './path/name.state';
 
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoaderComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -37,7 +42,12 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoaderInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
