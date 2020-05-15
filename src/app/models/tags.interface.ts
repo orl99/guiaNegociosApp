@@ -1,4 +1,4 @@
-export interface Tags {
+export interface Tag {
     term_id: number;
     name: string;
     slug: string;
