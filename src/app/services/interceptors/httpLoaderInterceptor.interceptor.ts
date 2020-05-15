@@ -5,19 +5,23 @@ import {
 // Loading component
 import { LoaderService } from '../loader.service';
 import { tap } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpLoaderInterceptor implements HttpInterceptor {
-    constructor(private loaderService: LoaderService) {}
+    loaderCtrlObj: HTMLIonLoadingElement;
+    constructor(private loaderService: LoaderService, private loadingController: LoadingController) {}
+
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        this.showLoader();
+        // await this.showLoader();
         console.log('ínterceptor');
         return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
-                this.hideLoader();
+                // this.hideLoader();
             }
+            return event;
         },
         (error: any) => {
             this.hideLoader();
@@ -25,15 +29,18 @@ export class HttpLoaderInterceptor implements HttpInterceptor {
         ));
     }
 
-    private showLoader() {
-        this.loaderService.showLoader();
+    private async showLoader() {
+        this.loaderCtrlObj = await this.loadingController.create({
+            message: '...',
+        });
+        await this.loaderCtrlObj.present();
+
+        // this.loaderService.showLoader();
     }
 
-    private hideLoader() {
-        this.loaderService.hideLoader();
+    private async hideLoader() {
+        await this.loaderCtrlObj.dismiss();
+        // await this.loaderCtrlObj.present();
+        // this.loaderService.hideLoader();
     }
-
-    // private onEndRequest() {
-    //     this.hideLoader();
-    // }
 }

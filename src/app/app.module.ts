@@ -22,11 +22,11 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // import { NameState } from './path/name.state';
 
-import { LoaderComponent } from 'src/app/components/loader/loader.component';
+// import { LoaderComponent } from 'src/app/components/loader/loader.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoaderComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
