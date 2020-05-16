@@ -23,6 +23,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // import { NameState } from './path/name.state';
 
 // import { LoaderComponent } from 'src/app/components/loader/loader.component';
+import { HTTP } from '@ionic-native/http/ngx';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoaderInterceptor,
       multi: true
-    }
+    },
+    HTTP
   ],
   bootstrap: [AppComponent]
 })
