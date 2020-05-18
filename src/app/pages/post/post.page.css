@@ -1,0 +1,14 @@
+img {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.main-title {
+  margin: 0;
+}
+
+.preTagStyle {
+  white-space: pre-wrap !important;
+  font-size: 0.9em !important;
+}
+/*# sourceMappingURL=post.page.css.map */

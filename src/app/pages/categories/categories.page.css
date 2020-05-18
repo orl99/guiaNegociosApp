@@ -1,0 +1,29 @@
+.cat-card-container {
+  background-size: cover;
+  height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.cat-card {
+  border: 8px solid white;
+  border-radius: 0;
+}
+
+.car-title-container {
+  width: 100%;
+  display: block;
+  background: -webkit-gradient(linear, left bottom, left top, from(black), to(rgba(255, 255, 255, 0)));
+  background: linear-gradient(0deg, black 0%, rgba(255, 255, 255, 0) 100%);
+  padding: 10px;
+}
+
+.car-title-container ion-card-subtitle,
+.car-title-container ion-card-title {
+  color: white !important;
+}
+/*# sourceMappingURL=categories.page.css.map */

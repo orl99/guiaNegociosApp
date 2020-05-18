@@ -1,0 +1,17 @@
+.hc-slot-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.hc-toolbar-bg-color {
+  --background: var(--gui-primary-color);
+}
+
+.ion-back-btn {
+  --color: white;
+}
+/*# sourceMappingURL=header.component.css.map */

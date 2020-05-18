@@ -1,7 +1,7 @@
 <app-header headerType="page"></app-header>
 
 <ion-content>
-    <div class="ion-padding">
+    <div>
         <!-- Ion select -->
         <ion-item>
             <ion-label>Filtros</ion-label>
@@ -16,13 +16,13 @@
         <!-- Ion-select -->
         <div class="cat-cards-container">
             <!-- Component proposal -->
-            <ion-card class="cat-card-container i-padding" 
+            <ion-card class="cat-card-container cat-card i-padding" 
             *ngFor="let post of allPosts" (click)="goPost(post.id)"
             style="-webkit-background-size: 100%;
                     -moz-background-size: 100%;
                     background-size: 100%;"
-            [ngStyle]="{'background-image' : 'linear-gradient(to bottom, rgba(128, 128, 128, 0.01), rgba(128, 128, 128, 0.7)), url(' + post.featured_image.medium + ')' }">
-                <div class="card-title-container">
+            [ngStyle]="{'background-image' : 'url(' + post.featured_image.medium + ')' }">
+                <div class="car-title-container">
                     <ion-card-title>{{post.title}}</ion-card-title>
                 </div>
             </ion-card>

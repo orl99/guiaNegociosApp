@@ -28,8 +28,8 @@ export class WordpressApiService {
   public async getCategories(): Promise<Categories[]> {
     const loader = await this.loadingController.create({ message: 'loading...' });
     await loader.present();
-    if (this.plt.is('ios')) {
-      console.log('IOS ON')
+    if (this.plt.is('ios') && this.plt.is('hybrid')) {
+      console.log('IOS ON');
       const res = await this.nativeHttp.get(`${this.customApiEndpoint}categories`, {}, {});
       const jsonRes = JSON.parse(res.data);
       await loader.dismiss();
@@ -46,7 +46,7 @@ export class WordpressApiService {
   public async getPostsByCat(cat: number): Promise<Post[]> {
     const loader = await this.loadingController.create({ message: 'loading...' });
     await loader.present();
-    if (this.plt.is('ios')) {
+    if (this.plt.is('ios') && this.plt.is('hybrid')) {
       const res = await this.nativeHttp.get(`${this.customApiEndpoint}posts/${cat}`, {}, {});
       const jsonRes = JSON.parse(res.data);
       await loader.dismiss();
@@ -62,7 +62,7 @@ export class WordpressApiService {
   public async getPost(postID: number): Promise<Post> {
     const loader = await this.loadingController.create({ message: 'loading...' });
     await loader.present();
-    if (this.plt.is('ios')) {
+    if (this.plt.is('ios') && this.plt.is('hybrid')) {
       const res = await this.nativeHttp.get(`${this.customApiEndpoint}post/${postID}`, {}, {});
       const jsonRes = JSON.parse(res.data);
       await loader.dismiss();
@@ -77,8 +77,8 @@ export class WordpressApiService {
 
   public async getTags(): Promise<Tag[]> {
     const loader = await this.loadingController.create({ message: 'loading...' });
-    await loader.present();
-    if (this.plt.is('ios')) {
+    await loader.present() ;
+    if (this.plt.is('ios') && this.plt.is('hybrid')) {
       const res = await this.nativeHttp.get(`${this.customApiEndpoint}tags`, {}, {});
       const jsonRes = JSON.parse(res.data);
       await loader.dismiss();
