@@ -9,6 +9,7 @@
     border: 8px solid white;
     border-radius: 0;
 }
+
 .car-title-container {
     width: 100%;
     display: block;
@@ -18,4 +19,8 @@
     ion-card-title {
         color: white !important;
     }
+}
+
+ion-card-title {
+    font-size: 16px !important;
 }

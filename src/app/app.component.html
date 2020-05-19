@@ -5,7 +5,6 @@
             <ion-content>
                 <ion-list id="inbox-list">
                     <ion-list-header>Guía Para Negocios</ion-list-header>
-                    <ion-note>Developed by mioagency.com</ion-note>
 
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
                         <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">

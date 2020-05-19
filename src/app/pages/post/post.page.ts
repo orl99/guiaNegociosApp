@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 
@@ -7,7 +7,7 @@ import { WordpressApiService } from 'src/app/services/wordpress-api.service';
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss'],
 })
-export class PostPage implements OnInit, AfterViewInit {
+export class PostPage implements OnInit {
   postId: number;
   mainImage: string;
   postHTML: string;
@@ -23,23 +23,24 @@ export class PostPage implements OnInit, AfterViewInit {
     this.mainImage = response.featured_image.large;
     this.postTitle = response.title;
     this.postHTML = response.content;
+    this.stylePostTags();
     console.log(response.featured_image);
   }
 
-  ngAfterViewInit() {
-    // Custom css
-    setTimeout(() => {
-      // TODO: Test this hack
-      const imgs = document.getElementsByTagName('img');
-      const preEles = document.getElementsByTagName('pre');
-      Array.from(imgs).forEach(el => {
-        el.style.height = 'auto';
-      });
-      Array.from(preEles).forEach(el => {
-        el.style.whiteSpace = 'pre-wrap';
-        el.style.fontSize = '0.9em';
-      });
-    }, 1000);
+  stylePostTags() {
+        // Custom css
+        setTimeout(() => {
+          // TODO: Test this hack
+          const imgs = document.getElementsByTagName('img');
+          const preEles = document.getElementsByTagName('pre');
+          Array.from(imgs).forEach(el => {
+            el.style.height = 'auto';
+          });
+          Array.from(preEles).forEach(el => {
+            el.style.whiteSpace = 'pre-wrap';
+            el.style.fontSize = '11px';
+          });
+        }, 100);
   }
 
 }
