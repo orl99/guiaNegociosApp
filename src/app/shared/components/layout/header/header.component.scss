@@ -1,11 +1,15 @@
 .hc-slot-center {
     display: flex;
     justify-content: center;
+    ion-img {
+        width: 150px;
+    }
 }
 
 .hc-toolbar-bg-color {
     --background: var(--gui-primary-color);
 }
+
 .ion-back-btn {
     --color: white;
 }

@@ -38,7 +38,7 @@ export class PostPage implements OnInit {
           });
           Array.from(preEles).forEach(el => {
             el.style.whiteSpace = 'pre-wrap';
-            el.style.fontSize = '11px';
+            el.style.fontSize = '12.5px';
           });
         }, 100);
   }
