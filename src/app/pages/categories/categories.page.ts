@@ -4,6 +4,12 @@ import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 import { Categories } from 'src/app/models/categories.interface';
 import { Router } from '@angular/router';
 
+
+// AdMob ionic plugs
+import { Plugins } from '@capacitor/core';
+import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
+const { AdMob } = Plugins;
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.page.html',
@@ -16,9 +22,8 @@ export class CategoriesPage implements OnInit {
 
   async ngOnInit() {
     const res = await this.wpService.getCategories();
-        console.log('res', res);
+    console.log('res', res);
     this.categories = res;
-
   }
 
   goPostsByCat(catId: number) {

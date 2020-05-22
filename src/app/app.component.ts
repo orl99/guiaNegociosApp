@@ -4,6 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { Plugins } from '@capacitor/core';
+const { AdMob } = Plugins;
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,7 +21,6 @@ export class AppComponent implements OnInit {
       icon: 'book'
     }
   ];
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    AdMob.initialize();
   }
 
   initializeApp() {
