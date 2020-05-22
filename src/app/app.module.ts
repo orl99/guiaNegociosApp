@@ -24,6 +24,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 // import { LoaderComponent } from 'src/app/components/loader/loader.component';
 import { HTTP } from '@ionic-native/http/ngx';
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { HTTP } from '@ionic-native/http/ngx';
   ],
   providers: [
     StatusBar,
+    AdMobFree,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
