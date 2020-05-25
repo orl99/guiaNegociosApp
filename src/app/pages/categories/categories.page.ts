@@ -17,8 +17,24 @@ const { AdMob } = Plugins;
 })
 export class CategoriesPage implements OnInit {
   categories: Categories[];
+  // AdMob Options
+  private AdMobOptions = {
+    adId: 'ca-app-pub-8693507653531046/2409629315',
+    adSize: AdSize.BANNER,
+    position: AdPosition.BOTTOM_CENTER,
+    margin: 0,
+  };
+
   constructor( private wpService: WordpressApiService,
-               private router: Router) { }
+               private router: Router) {
+                AdMob.showBanner(this.AdMobOptions);
+                AdMob.addListener('onAdLoaded', () => {
+                  console.log('AdMob banner loaded');
+                });
+                AdMob.addListener('onAdSize', (info: boolean) => {
+                  console.log('AdMob size', info);
+                });
+  }
 
   async ngOnInit() {
     const res = await this.wpService.getCategories();
