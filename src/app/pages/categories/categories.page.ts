@@ -18,11 +18,12 @@ const { AdMob } = Plugins;
 export class CategoriesPage implements OnInit {
   categories: Categories[];
   // AdMob Options
-  private AdMobOptions = {
+  private AdMobOptions: AdOptions = {
     adId: 'ca-app-pub-8693507653531046/2409629315',
     adSize: AdSize.BANNER,
     position: AdPosition.BOTTOM_CENTER,
     margin: 0,
+    isTesting: true
   };
 
   constructor( private wpService: WordpressApiService,
