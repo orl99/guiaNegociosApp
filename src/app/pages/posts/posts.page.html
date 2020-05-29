@@ -1,6 +1,6 @@
 <app-header headerType="page"></app-header>
 <ion-content>
-    <div>
+    <div class="cat-page-conatiner">
         <!-- Ion select -->
         <ion-item>
             <ion-label>Filtros</ion-label>
@@ -23,5 +23,10 @@
                 </div>
             </ion-card>
         </div>
+        <ion-infinite-scroll #infiLoadingEl [disabled]="infinityLoadingFlag" threshold="5%" position="bottom" (ionInfinite)="loadMorePost($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </div>
+    <div class="post-adBarArea-container"></div>
 </ion-content>

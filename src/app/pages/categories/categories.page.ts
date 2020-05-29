@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
 import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
+
+// ionic
+import { Platform } from '@ionic/angular';
 const { AdMob } = Plugins;
 
 @Component({
@@ -17,24 +20,30 @@ const { AdMob } = Plugins;
 })
 export class CategoriesPage implements OnInit {
   categories: Categories[];
-  // AdMob Options
+  // AdMob Options for categories
   private AdMobOptions: AdOptions = {
     adId: 'ca-app-pub-8693507653531046/2409629315',
     adSize: AdSize.BANNER,
     position: AdPosition.BOTTOM_CENTER,
     margin: 0,
-    isTesting: true
+    isTesting: true,
   };
 
-  constructor( private wpService: WordpressApiService,
-               private router: Router) {
-                AdMob.showBanner(this.AdMobOptions);
-                AdMob.addListener('onAdLoaded', () => {
-                  console.log('AdMob banner loaded');
-                });
-                AdMob.addListener('onAdSize', (info: boolean) => {
-                  console.log('AdMob size', info);
-                });
+  constructor(
+      private wpService: WordpressApiService,
+      private router: Router,
+      private plt: Platform) {
+      if (plt.is('hybrid') ) {
+        AdMob.showBanner(this.AdMobOptions);
+        AdMob.addListener('onAdLoaded', () => {
+          console.log('AdMob banner loaded');
+        });
+        AdMob.addListener('onAdSize', (info: boolean) => {
+          console.log('AdMob size', info);
+        });
+      } else {
+        // console.log('no mobile')
+      }
   }
 
   async ngOnInit() {
@@ -43,8 +52,34 @@ export class CategoriesPage implements OnInit {
     this.categories = res;
   }
 
-  goPostsByCat(catId: number) {
+  public goPostsByCat(catId: number) {
     this.router.navigate(['categories/posts/', catId]);
   }
 
+  public closeBannerAd() {
+    AdMob.hideBanner()
+      .then(
+        val => {
+          console.log('val', val);
+        },
+        error => {
+          console.log('error', error);
+        }
+      );
+  }
+
+  /**
+   * resumeBanner
+   */
+  public resumeBanner() {
+    AdMob.resumeBanner()
+    .then(
+      val => {
+        console.log('val', val);
+      },
+      error => {
+        console.log('error', error);
+      }
+    );
+  }
 }

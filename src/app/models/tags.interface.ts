@@ -10,3 +10,8 @@ export interface Tag {
     count: number;
     filter: string;
 }
+export interface LiteTag {
+    id: number;
+    name: string;
+    slug: string;
+}
