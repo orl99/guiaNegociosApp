@@ -27,7 +27,9 @@ export class PostPage implements OnInit, AfterViewInit {
   at: LiteTag[] = [];
   pageNum = 1;
   initialPostsLenght: number;
-  infinityLoadingFlag = false;
+  infinityLoadingFlag = true;
+  pageFilterModeFlag = false;
+  filterTagId: number;
 
   // Dom elements
   @ViewChild('infiLoadingEl', { static: false }) infiLoadingEl: ElementRef;
@@ -58,7 +60,7 @@ export class PostPage implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    // Get tags
+    // Get tags by category
     const responseTags = await this.wpService.getTagsByCat(this.category);
     console.log('Tags', responseTags);
     this.allTags = responseTags;
@@ -66,23 +68,13 @@ export class PostPage implements OnInit, AfterViewInit {
 
   // TODO: TEST PERFORMANCE
   async ngAfterViewInit() {
-    // // Get all the posts by category
-    // const response = await this.wpService.getPostsByCat(this.category, this.pageNum);
-    // this.initialPostsLenght = response.length;
-    // console.log('Response', response);
-    // this.inmutePosts = [...response];
-    // this.allPosts = [...response];
-    // // this.allTags = [...this.getTagsFromPost()];
-    // console.log(this.initialPostsLenght);
-    // // TODO: TEST funct
-    // if (this.initialPostsLenght < 5) {
-    //   console.log('Infinity scroll disabled');
-    //   this.infinityLoadingFlag = true;
-    // }
+    // Load All Posts by 5 to 5
     this.loadPosts();
   }
 
+  /* Load All Posts --------------------------------------------------------------------*/
   async loadPosts() {
+    this.pageFilterModeFlag = false;
     // Get all the posts by category
     const response = await this.wpService.getPostsByCat(this.category, this.pageNum);
     this.initialPostsLenght = response.length;
@@ -93,7 +85,7 @@ export class PostPage implements OnInit, AfterViewInit {
     // TODO: TEST funct
     if (this.initialPostsLenght < 5) {
       console.log('Infinity scroll disabled');
-      this.infinityLoadingFlag = true;
+      this.infinityLoadingSwitch(false);
     }
   }
 
@@ -123,21 +115,10 @@ export class PostPage implements OnInit, AfterViewInit {
       toastMessage.present();
     }
   }
+  /* Load All Posts --------------------------------------------------------------------*/
 
-  filterPosts(filterVal: number | string) {
-    // Reset all the posts
-    this.pageNum = 0;
-    this.allPosts = [];
-    this.inmutePosts = [];
-    if (filterVal === 'all') {
-      // Normal posts
-      this.loadPosts();
-    } else {
-      // Number() hack ;)
-      this.loadMorePostByTag(Number(filterVal));
-    }
-  }
-
+  /* Load Posts by tag -------------------------------------------------------------------- */
+  // Load posts by tag -> just the first 5, this methos is not compatible with infinity loading
   async loadPostsByTag(tagId: number) {
     // Get all the posts by category
     const response = await this.wpService.getPostByCatAndTags(this.category, tagId, this.pageNum);
@@ -145,32 +126,76 @@ export class PostPage implements OnInit, AfterViewInit {
     console.log('Response', response);
     this.inmutePosts = [...response];
     this.allPosts = [...response];
-    console.log(this.initialPostsLenght);
+    // console.log(this.initialPostsLenght);
     // TODO: TEST funct
     if (this.initialPostsLenght < 5) {
       console.log('Infinity scroll disabled');
-      this.infinityLoadingFlag = true;
+      this.infinityLoadingSwitch(false);
     }
   }
 
-  // This method will load more post with pages
-  async loadMorePostByTag(filterVal: number) {
+  // This method will load more post 5 by 5 with infinity loading
+  async loadMorePostByTag($event: any ) {
     // load more post by tag
-    const response = await this.wpService.getPostByCatAndTags(this.category, filterVal, this.pageNum);
+    this.pageNum++;
+    const response = await this.wpService.getPostByCatAndTags(this.category, this.filterTagId, this.pageNum);
     console.log('FilterVars', response);
-    if (response.length) {
-      this.allPosts = [...response];
+    if ( response.length ) {
+      console.log('More loaded posts by tag', response);
+      const post = [...this.allPosts];
+      this.allPosts = [...post, ...response];
+      console.log('all posts by tag', this.allPosts);
+      this.inmutePosts = [...this.allPosts];
+      $event.target.complete();
+    }
+    if ( !response.length ) {
+      console.log('infinty loading cancel');
+      $event.target.disabled = true;
+      const toastMessage = await this.toastCtrl.create({
+        duration: 2000,
+        message: 'Estas al dia :)',
+        color: 'dark'
+      });
+      toastMessage.present();
     }
   }
+  /* Load Posts by tag -------------------------------------------------------------------- */
+
+
+  /* Filter methos -------------------------------------------------------------------- */
+  filterPosts(filterVal: number) {
+    // Reset all the posts
+    this.infinityLoadingSwitch(true);
+    this.pageNum = 1;
+    this.allPosts = [];
+    this.inmutePosts = [];
+    console.log('filterval', filterVal);
+    // tslint:disable-next-line: triple-equals
+    if (filterVal == -1) {
+      this.filterTagId = 0;
+      this.pageFilterModeFlag = false;
+      // Normal posts
+      console.log('Normal post');
+      this.loadPosts();
+    } else {
+      this.filterTagId = filterVal;
+      this.pageFilterModeFlag = true;
+      this.loadPostsByTag(filterVal);
+    }
+  }
+  /* Filter methos -------------------------------------------------------------------- */
 
   // Navigate to the post page
   async goPost(postId: number) {
     this.router.navigate(['categories/post', postId]);
   }
 
+  // Inifinity loading switch
+  private infinityLoadingSwitch(status: boolean) {
+    (status) ? this.infinityLoadingFlag = true  : this.infinityLoadingFlag = false;
+  }
 
-
-  // Decription------------------------------------------------------------------------------------------------>
+  // Decripted methods ---------------------------------------------------------------------------------->
   // This function will return a list of tags from the post that are not duplicated
   // This algo can be refactor to another tipe of filter
   // Decrepted
@@ -201,9 +226,9 @@ export class PostPage implements OnInit, AfterViewInit {
   }
 
   // Decrepted
-  postFilter(filterVal: number | string) {
+  postFilter(filterVal: number) {
     console.log('Filter', filterVal);
-    if (filterVal === 'all') {
+    if (filterVal === -1) {
       this.allPosts = [...this.inmutePosts];
     } else {
       // Filter post

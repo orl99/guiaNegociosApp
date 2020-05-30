@@ -4,11 +4,11 @@
         <!-- Ion select -->
         <ion-item>
             <ion-label>Filtros</ion-label>
-            <ion-select #filtersSelect (ionChange)="postFilter(filtersSelect.value)" interface="popover" placeholder="Filtrar Posts por:">
+            <ion-select #filtersSelect (ionChange)="filterPosts(filtersSelect.value)" interface="popover" placeholder="Filtrar Posts por:">
                 <!-- Taxonomis goes here -->
-                <ion-select-option value="all"> Todas </ion-select-option>
+                <ion-select-option [value]="-1"> Todas </ion-select-option>
                 <ng-container *ngFor="let tag of allTags">
-                    <ion-select-option [value]="tag.term_taxonomy_id">{{tag.name}}</ion-select-option>
+                    <ion-select-option [value]="tag.id">{{tag.name}}</ion-select-option>
                 </ng-container>
             </ion-select>
         </ion-item>
@@ -23,10 +23,20 @@
                 </div>
             </ion-card>
         </div>
-        <ion-infinite-scroll #infiLoadingEl [disabled]="infinityLoadingFlag" threshold="5%" position="bottom" (ionInfinite)="loadMorePost($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+        <ng-container *ngIf="pageFilterModeFlag; else elseTemplate">
+            <!-- <h1>Tag Loading</h1> -->
+            <ion-infinite-scroll #infiLoadingEl [disabled]="!infinityLoadingFlag" threshold="5%" position="bottom" (ionInfinite)="loadMorePostByTag($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <!-- <h1>Normal loading</h1> -->
+            <ion-infinite-scroll #infiLoadingEl [disabled]="!infinityLoadingFlag" threshold="5%" position="bottom" (ionInfinite)="loadMorePost($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+        </ng-template>
     </div>
     <div class="post-adBarArea-container"></div>
 </ion-content>
