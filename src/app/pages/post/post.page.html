@@ -1,13 +1,16 @@
 <app-header headerType="page"></app-header>
 
 <ion-content>
-    <div class="post-main-container" *ngIf="!!mainImage">
-        <ion-img style="padding: 2px;" [src]="mainImage"></ion-img>
-    </div>
-    <div class="ion-padding">
-        <div>
-            <h1 class="main-title">{{postTitle}}</h1>
+    <div class="post-main-container">
+        <div *ngIf="!!mainImage">
+            <ion-img style="padding: 2px;" [src]="mainImage"></ion-img>
         </div>
-        <div [innerHTML]="postHTML"></div>
+        <div class="ion-padding post">
+            <div>
+                <h1 class="main-title">{{postTitle}}</h1>
+            </div>
+            <div [innerHTML]="postHTML"></div>
+        </div>
     </div>
+    <div class="post-adBarArea-container"></div>
 </ion-content>

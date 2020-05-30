@@ -25,7 +25,6 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // import { LoaderComponent } from 'src/app/components/loader/loader.component';
 import { HTTP } from '@ionic-native/http/ngx';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

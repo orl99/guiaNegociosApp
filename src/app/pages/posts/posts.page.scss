@@ -25,3 +25,15 @@
 ion-card-title {
     font-size: 16px !important;
 }
+
+.post-adBarArea-container {
+    width: 100vw;
+    height: 50px;
+    background-color: white;
+    position: fixed;
+    top: calc(100vh - 50px);
+}
+
+.cat-page-conatiner {
+    margin-bottom: 80px;
+}

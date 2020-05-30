@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+import { Plugins } from '@capacitor/core';
+const { AdMob } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -18,7 +21,6 @@ export class AppComponent implements OnInit {
       icon: 'book'
     }
   ];
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -26,6 +28,12 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    AdMob.initialize();
+    if (isDevMode()) {
+      console.log('Welcome Developer, Dev Mode is On :D');
+    } else {
+      console.log('Welcome Client, Prob Mode is On :O');
+    }
   }
 
   initializeApp() {
