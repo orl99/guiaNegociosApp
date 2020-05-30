@@ -13,6 +13,9 @@ import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
 import { Platform } from '@ionic/angular';
 const { AdMob } = Plugins;
 
+// Envs
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.page.html',
@@ -26,7 +29,7 @@ export class CategoriesPage implements OnInit {
     adSize: AdSize.BANNER,
     position: AdPosition.BOTTOM_CENTER,
     margin: 0,
-    isTesting: true,
+    isTesting: environment.adMobTesting,
   };
 
   constructor(

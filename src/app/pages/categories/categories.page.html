@@ -1,6 +1,6 @@
 <app-header headerType="main"></app-header>
 <ion-content>
-    <div>
+    <div class="categories-main-container">
         <div class="cat-cards-container">
             <!-- Component proposal -->
             <ion-card class="cat-card-container cat-card i-padding" *ngFor="let cat of categories" (click)="goPostsByCat(cat.id)" style="-webkit-background-size: 100%;
@@ -13,4 +13,5 @@
             </ion-card>
         </div>
     </div>
+    <div class="post-adBarArea-container"></div>
 </ion-content>

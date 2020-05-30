@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -29,6 +29,11 @@ export class AppComponent implements OnInit {
   ) {
     this.initializeApp();
     AdMob.initialize();
+    if (isDevMode()) {
+      console.log('Welcome Developer, Dev Mode is On :D');
+    } else {
+      console.log('Welcome Client, Prob Mode is On :O');
+    }
   }
 
   initializeApp() {

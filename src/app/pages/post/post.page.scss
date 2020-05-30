@@ -12,3 +12,15 @@ img {
     white-space: pre-wrap !important;
     font-size: 0.9em !important;
 }
+
+.post-adBarArea-container {
+    width: 100vw;
+    height: 50px;
+    background-color: white;
+    position: fixed;
+    top: calc(100vh - 50px);
+}
+
+.post-main-container {
+    margin-bottom: 50px;
+}
