@@ -3,6 +3,7 @@
     "appName": "Guia Para Negocios",
     "bundledWebRuntime": false,
     "npmClient": "npm",
+    "version": "1.0.2",
     "webDir": "www",
     "plugins": {
         "SplashScreen": {
