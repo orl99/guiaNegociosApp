@@ -73,5 +73,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>GADIsAdManagerApp</key>
+    <true/>
+    <key>GADApplicationIdentifier</key>
+    <!-- replace this value with your App ID key-->
+    <string>ca-app-pub-8693507653531046~6850451094</string>
+
 </dict>
 </plist>

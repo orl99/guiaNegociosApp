@@ -24,9 +24,16 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoriesPage implements OnInit {
   categories: Categories[];
-  // AdMob Options for categories
-  private AdMobOptions: AdOptions = {
+  // AdMob Options for categories for Android
+  private AdMobOptionsAndroid: AdOptions = {
     adId: 'ca-app-pub-8693507653531046/2409629315',
+    adSize: AdSize.SMART_BANNER,
+    position: AdPosition.BOTTOM_CENTER,
+    isTesting: environment.adMobTesting,
+  };
+  // AdMob Options for categories for iOS
+  private AdMobOptionsios: AdOptions = {
+    adId: 'ca-app-pub-8693507653531046/5972483697',
     adSize: AdSize.SMART_BANNER,
     position: AdPosition.BOTTOM_CENTER,
     isTesting: environment.adMobTesting,
@@ -36,16 +43,23 @@ export class CategoriesPage implements OnInit {
       private wpService: WordpressApiService,
       private router: Router,
       private plt: Platform) {
-      if (plt.is('hybrid') ) {
-        AdMob.showBanner(this.AdMobOptions);
+      if (plt.is('hybrid') && plt.is("android")) {
+        AdMob.showBanner(this.AdMobOptionsAndroid);
         AdMob.addListener('onAdLoaded', () => {
-          console.log('AdMob banner loaded');
+          console.log('AdMob banner loaded in Android');
         });
         AdMob.addListener('onAdSize', (info: boolean) => {
           console.log('AdMob size', info);
         });
-      } else {
-        // console.log('no mobile')
+      }
+      if (plt.is('hybrid') && plt.is("ios")) {
+        AdMob.showBanner(this.AdMobOptionsios);
+        AdMob.addListener('onAdLoaded', () => {
+          console.log('AdMob banner loaded in iOS');
+        });
+        AdMob.addListener('onAdSize', (info: boolean) => {
+          console.log('AdMob size', info);
+        });
       }
   }
 
