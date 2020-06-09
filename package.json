@@ -1,7 +1,7 @@
 {
-  "name": "guiaNegociosApp",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "Guia de gegocios",
+  "version": "1.0.4",
+  "author": "Orlando Garcia",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -31,11 +31,12 @@
     "@ngxs/devtools-plugin": "^3.6.2",
     "@ngxs/logger-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
-    "@rdlabo/capacitor-admob": "^1.0.1",
+    "capacitor-admob": "0.1.0",
     "cordova-plugin-advanced-http": "^2.4.1",
     "cordova-plugin-file": "^6.0.2",
     "cordova-promise-polyfill": "0.0.2",
     "core-js": "^2.5.4",
+    "jetifier": "^1.6.5",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

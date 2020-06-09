@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
-    AdMob.initialize();
+    AdMob.initialize('ca-app-pub-8693507653531046~7933897666');
     if (isDevMode()) {
       console.log('Welcome Developer, Dev Mode is On :D');
     } else {

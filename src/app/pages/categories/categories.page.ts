@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
-import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
+import { AdOptions, AdSize, AdPosition } from "capacitor-admob";
+
 
 // ionic
 import { Platform } from '@ionic/angular';
@@ -26,9 +27,8 @@ export class CategoriesPage implements OnInit {
   // AdMob Options for categories
   private AdMobOptions: AdOptions = {
     adId: 'ca-app-pub-8693507653531046/2409629315',
-    adSize: AdSize.BANNER,
+    adSize: AdSize.SMART_BANNER,
     position: AdPosition.BOTTOM_CENTER,
-    margin: 0,
     isTesting: environment.adMobTesting,
   };
 

@@ -35,3 +35,12 @@ ion-card {
 img {
     height: auto;
 }
+.toast-wrapper .toast-bottom {
+    z-index: 2000;
+    top: -200px;
+    transform: translateY(-200px) !important;
+}
+// ion-toast {
+//     transform: translateY(-100px) !important;
+//     border-color: transparent !important;
+// }
