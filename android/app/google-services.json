@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "567133647039",
+    "firebase_url": "https://guia-para-negocios.firebaseio.com",
+    "project_id": "guia-para-negocios",
+    "storage_bucket": "guia-para-negocios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567133647039:android:cb89e3eac4798396aa960a",
+        "android_client_info": {
+          "package_name": "com.guiaparanegocios.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567133647039-ijbp77lf9crm2v5akpqg66m6rtc03b39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaOmip4wcoRt6mZqTQA-QOcMEvFD9dl2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567133647039-ijbp77lf9crm2v5akpqg66m6rtc03b39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
