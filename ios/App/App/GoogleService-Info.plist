@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>567133647039-vvl6spdh3ctvq5ge7b0lm1o3mv0aoih5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.567133647039-vvl6spdh3ctvq5ge7b0lm1o3mv0aoih5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCxZmk4usurHT_ZQkWWepQmtwZAKLAyRP4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>567133647039</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.guiaparanegocios.app</string>
+	<key>PROJECT_ID</key>
+	<string>guia-para-negocios</string>
+	<key>STORAGE_BUCKET</key>
+	<string>guia-para-negocios.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:567133647039:ios:5710f94459ecc1e0aa960a</string>
+	<key>DATABASE_URL</key>
+	<string>https://guia-para-negocios.firebaseio.com</string>
+</dict>
+</plist>
