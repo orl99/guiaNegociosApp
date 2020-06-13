@@ -33,6 +33,7 @@
     "@ngxs/store": "^3.6.2",
     "capacitor-admob": "0.1.0",
     "cordova-plugin-advanced-http": "^2.4.1",
+    "cordova-plugin-facebook4": "6.4.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-promise-polyfill": "0.0.2",
     "core-js": "^2.5.4",
@@ -65,5 +66,14 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-facebook4": {
+        "APP_ID": "283881516139140",
+        "APP_NAME": "Guia Para Negocios",
+        "FACEBOOK_HYBRID_APP_EVENTS": "true"
+      }
+    }
+  }
 }

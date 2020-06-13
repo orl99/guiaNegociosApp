@@ -1,7 +1,8 @@
 {
-    "name": "Guia Para Negocios",
-    "integrations": {
-        "capacitor": {}
-    },
-    "type": "angular"
+  "name": "Guia Para Negocios",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
 }
