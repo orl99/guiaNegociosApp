@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbshareextension</string>
-	</array>
-	<key>FacebookAppID</key>
-	<string>283881516139140</string>
-	<key>FacebookDisplayName</key>
-	<string>Guia Para Negocios</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -44,6 +32,22 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>283881516139140</string>
+	<key>FacebookDisplayName</key>
+	<string>Guia Para Negocios</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-8693507653531046~6850451094</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -86,9 +90,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>GADIsAdManagerApp</key>
-	<true/>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-8693507653531046~6850451094</string>
 </dict>
 </plist>
