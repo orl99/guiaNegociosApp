@@ -1,8 +1,16 @@
+@import 'src/theme/mediaQueries.scss';
+
 .cat-card-container {
     background-size: cover;
     height: 150px;
     display: flex;
     align-items: flex-end;
+    @include md {
+        height: 200px;
+    }
+    @include xl {
+        height: 250px;
+    }
 }
 
 .cat-card {
@@ -35,4 +43,16 @@ ion-card-title {
 
 .categories-main-container {
     margin-bottom: 100px;
+}
+
+.cat-cards-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    @include md {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include lg {
+        padding: 10px 5%;
+        grid-template-columns: 1fr 1fr;
+    }
 }
