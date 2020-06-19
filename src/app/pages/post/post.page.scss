@@ -1,3 +1,4 @@
+@import 'src/theme/mediaQueries.scss';
 img {
     width: 100% !important;
     height: auto !important;
@@ -13,14 +14,13 @@ img {
     font-size: 0.9em !important;
 }
 
-.post-adBarArea-container {
-    width: 100vw;
-    height: 50px;
-    background-color: white;
-    position: fixed;
-    top: calc(100vh - 50px);
-}
-
 .post-main-container {
     margin-bottom: 80px;
+}
+
+.post-container{
+    padding: 16px;
+    @include md {
+        padding: 16px 8%;
+    }
 }
