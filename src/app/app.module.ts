@@ -5,6 +5,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +50,8 @@ import { HTTP } from '@ionic-native/http/ngx';
       useClass: HttpLoaderInterceptor,
       multi: true
     },
-    HTTP
+    HTTP,
+    AppVersion
   ],
   bootstrap: [AppComponent]
 })
