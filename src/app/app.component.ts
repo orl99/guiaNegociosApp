@@ -27,12 +27,12 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Recursos',
-      url: '---',
+      url: 'recursos',
       icon: 'file-tray-stacked'
     },
     {
       title: 'Sobre la app',
-      url: '--',
+      url: 'about-app',
       icon: 'information-circle'
     },
   ];

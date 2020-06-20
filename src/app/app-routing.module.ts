@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'categories/post/:postId',
     loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
+  },
+  {
+    path: 'recursos',
+    loadChildren: () => import('./pages/recursos/recursos.module').then( m => m.RecursosPageModule)
+  },
+  {
+    path: 'about-app',
+    loadChildren: () => import('./pages/about-app/about-app.module').then( m => m.AboutAppPageModule)
   }
 ];
 
