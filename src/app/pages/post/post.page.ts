@@ -4,7 +4,7 @@ import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
-// import { AdOptions, AdSize, AdPosition } from "capacitor-admob";
+
 const { AdMob } = Plugins;
 
 @Component({
@@ -17,27 +17,9 @@ export class PostPage implements OnInit {
   mainImage: string;
   postHTML: string;
   postTitle: string;
-
-  // AdMob Options for single post in android platform
-  // private AdMobOptions: AdOptions = {
-  //   adId: 'ca-app-pub-8693507653531046/2767139387',
-  //   adSize: AdSize.BANNER,
-  //   position: AdPosition.BOTTOM_CENTER,
-  //   margin: 0,
-  //   isTesting: true
-  // };
   constructor(private route: ActivatedRoute,
               private wpService: WordpressApiService) {
     route.params.subscribe(params => this.postId = params['postId']);
-
-    // AdMob config init
-    // AdMob.showBanner(this.AdMobOptions);
-    // AdMob.addListener('onAdLoaded', () => {
-    //   console.log('AdMob banner loaded');
-    // });
-    // AdMob.addListener('onAdSize', (info: boolean) => {
-    //   console.log('AdMob size', info);
-    // });
   }
 
   async ngOnInit() {

@@ -1,9 +1,17 @@
+@import 'src/theme/mediaQueries.scss';
+
 .cat-card-container {
     // background-image: linear-gradient(to bottom, rgba(128, 128, 128, 0.01), rgba(128, 128, 128, 0.7)), url('https://guiaparanegocios.net/wp-content/uploads/2020/04/negocios-en-linea.jpg');
     background-size: cover;
     height: 150px;
     display: flex;
     align-items: flex-end;
+    @include md {
+        height: 200px;
+    }
+    @include xl {
+        height: 250px;
+    }
 }
 
 .cat-card {
@@ -26,23 +34,18 @@ ion-card-title {
     font-size: 16px !important;
 }
 
-.post-adBarArea-container {
-    width: 100vw;
-    height: 50px;
-    background-color: white;
-    position: fixed;
-    top: calc(100vh - 50px);
-}
-
 .cat-page-conatiner {
     margin-bottom: 100px;
 }
-// ion-toast {
-//     transform: translateY(-100px) !important;
-//     border-color: transparent !important;
-//     .toastStyle {
-//         z-index: 200;
-//         top: -200px;
-//         transform: translateY(-200px) !important;
-//     }
-// }
+
+.cat-cards-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    @include md {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include lg {
+        padding: 10px 5%;
+        grid-template-columns: 1fr 1fr;
+    }
+}

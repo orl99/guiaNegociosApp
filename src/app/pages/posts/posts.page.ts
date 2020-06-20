@@ -8,7 +8,7 @@ import { Tag, LiteTag } from 'src/app/models/tags.interface';
 
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
-// import { AdOptions, AdSize, AdPosition } from '@rdlabo/capacitor-admob';
+
 const { AdMob } = Plugins;
 // Ionic
 import { ToastController } from '@ionic/angular';
@@ -33,15 +33,6 @@ export class PostPage implements OnInit, AfterViewInit {
 
   // Dom elements
   @ViewChild('infiLoadingEl', { static: false }) infiLoadingEl: ElementRef;
-
-  // AdMob Options for posts in android platform
-  // private AdMobOptions: AdOptions = {
-  //   adId: 'ca-app-pub-8693507653531046/5975277721',
-  //   adSize: AdSize.BANNER,
-  //   position: AdPosition.BOTTOM_CENTER,
-  //   margin: 0,
-  //   isTesting: true
-  // };
   constructor(private wpService: WordpressApiService,
               private route: ActivatedRoute,
               private router: Router,
@@ -49,14 +40,6 @@ export class PostPage implements OnInit, AfterViewInit {
     route.params.subscribe((params) => {
       this.category = params['catId'];
     });
-    // // AdMob config init
-    // AdMob.showBanner(this.AdMobOptions);
-    // AdMob.addListener('onAdLoaded', () => {
-    //   console.log('AdMob banner loaded');
-    // });
-    // AdMob.addListener('onAdSize', (info: boolean) => {
-    //   console.log('AdMob size', info);
-    // });
   }
 
   async ngOnInit() {
@@ -83,7 +66,7 @@ export class PostPage implements OnInit, AfterViewInit {
     this.allPosts = [...response];
     console.log(this.initialPostsLenght);
     // TODO: TEST funct
-    if (this.initialPostsLenght < 5) {
+    if (this.initialPostsLenght < 10) {
       console.log('Infinity scroll disabled');
       this.infinityLoadingSwitch(false);
     }
@@ -107,14 +90,6 @@ export class PostPage implements OnInit, AfterViewInit {
     if ( !response.length ) {
       console.log('infinty loading cancel');
       $event.target.disabled = true;
-      // const toastMessage = await this.toastCtrl.create({
-      //   duration: 2000,
-      //   message: 'Estas al dia :)',
-      //   color: 'dark',
-      //   position: 'bottom',
-      //   cssClass: 'toastStyle'
-      // });
-      // toastMessage.present();
     }
   }
   /* Load All Posts --------------------------------------------------------------------*/
@@ -128,9 +103,8 @@ export class PostPage implements OnInit, AfterViewInit {
     console.log('Response', response);
     this.inmutePosts = [...response];
     this.allPosts = [...response];
-    // console.log(this.initialPostsLenght);
     // TODO: TEST funct
-    if (this.initialPostsLenght < 5) {
+    if (this.initialPostsLenght < 10) {
       console.log('Infinity scroll disabled');
       this.infinityLoadingSwitch(false);
     }
@@ -153,12 +127,6 @@ export class PostPage implements OnInit, AfterViewInit {
     if ( !response.length ) {
       console.log('infinty loading cancel');
       $event.target.disabled = true;
-      // const toastMessage = await this.toastCtrl.create({
-      //   duration: 2000,
-      //   message: 'Estas al dia :)',
-      //   color: 'dark'
-      // });
-      // toastMessage.present();
     }
   }
   /* Load Posts by tag -------------------------------------------------------------------- */

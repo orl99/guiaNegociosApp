@@ -6,6 +6,10 @@
     <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin"/>
   </feature>
 
+  <feature name="AppVersion">
+    <param name="android-package" value="uk.co.whiteoctober.cordova.AppVersion"/>
+  </feature>
+
   <feature name="FacebookConnectPlugin">
     <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin"/>
     <param name="onload" value="true"/>

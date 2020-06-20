@@ -7,6 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Plugins } from '@capacitor/core';
 const { AdMob } = Plugins;
 
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { ThrowStmt } from '@angular/compiler';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,18 +18,30 @@ const { AdMob } = Plugins;
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
+  public versionName: string;
   public appPages = [
     {
       title: 'Guias',
       url: 'categories',
       icon: 'book'
-    }
+    },
+    {
+      title: 'Recursos',
+      url: '---',
+      icon: 'file-tray-stacked'
+    },
+    {
+      title: 'Sobre la app',
+      url: '--',
+      icon: 'information-circle'
+    },
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private appVersion: AppVersion,
   ) {
     this.initializeApp();
     AdMob.initialize('ca-app-pub-8693507653531046~7933897666');
@@ -40,13 +56,22 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      if (this.platform.is('hybrid')) {
+        this.getAppVersion();
+      }
     });
   }
 
-  ngOnInit() {
-    // const path = window.location.pathname.split('folder/')[1];
-    // if (path !== undefined) {
-    //   this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    // }
+  ngOnInit() {}
+
+  async getAppVersion() {
+    const versionNumber =  await this.appVersion.getVersionNumber();
+    if (this.platform.is('ios')) {
+      this.versionName = `${versionNumber} iOS`;
+    }
+    if (this.platform.is('android')) {
+      this.versionName = `${versionNumber} Android`;
+    }
+    console.log('app version:', this.versionName);
   }
 }
