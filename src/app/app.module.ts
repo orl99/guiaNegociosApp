@@ -19,13 +19,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 // NGXS
-import { NgxsModule } from '@ngxs/store';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+// import { NgxsModule } from '@ngxs/store';
+// import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+// import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // import { NameState } from './path/name.state';
 
-// import { LoaderComponent } from 'src/app/components/loader/loader.component';
 import { HTTP } from '@ionic-native/http/ngx';
+
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,11 +36,11 @@ import { HTTP } from '@ionic-native/http/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    NgxsModule.forRoot([
-      // NameState
-    ]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot()
+    // NgxsModule.forRoot([
+    //   // NameState
+    // ]),
+    // NgxsReduxDevtoolsPluginModule.forRoot(),
+    // NgxsLoggerPluginModule.forRoot()
   ],
   providers: [
     StatusBar,
@@ -51,7 +52,8 @@ import { HTTP } from '@ionic-native/http/ngx';
       multi: true
     },
     HTTP,
-    AppVersion
+    AppVersion,
+    Facebook
   ],
   bootstrap: [AppComponent]
 })

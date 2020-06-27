@@ -35,8 +35,7 @@ export class PostPage implements OnInit, AfterViewInit {
   @ViewChild('infiLoadingEl', { static: false }) infiLoadingEl: ElementRef;
   constructor(private wpService: WordpressApiService,
               private route: ActivatedRoute,
-              private router: Router,
-              private toastCtrl: ToastController) {
+              private router: Router,) {
     route.params.subscribe((params) => {
       this.category = params['catId'];
     });

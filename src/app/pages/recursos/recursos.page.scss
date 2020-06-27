@@ -1,0 +1,50 @@
+@import 'src/theme/mediaQueries.scss';
+
+.cat-card-container {
+    background-size: cover;
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+    @include md {
+        height: 200px;
+    }
+    @include xl {
+        height: 250px;
+    }
+}
+
+.cat-card {
+    border: 8px solid white;
+    border-radius: 0;
+}
+
+.car-title-container {
+    width: 100%;
+    display: block;
+    background: linear-gradient(0deg, black 0%, rgba(255, 255, 255, 0) 100%);
+    padding: 10px;
+    ion-card-subtitle,
+    ion-card-title {
+        color: white !important;
+    }
+}
+
+ion-card-title {
+    font-size: 16px !important;
+}
+
+.cat-page-conatiner {
+    margin-bottom: 100px;
+}
+
+.cat-cards-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    @include md {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include lg {
+        padding: 10px 5%;
+        grid-template-columns: 1fr 1fr;
+    }
+}
