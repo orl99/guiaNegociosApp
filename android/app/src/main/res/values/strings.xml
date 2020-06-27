@@ -7,4 +7,5 @@
     <string name="admob_app_id">ca-app-pub-8693507653531046~7933897666</string>
     <string name="fb_app_id">283881516139140</string>
     <string name="fb_app_name">Guia Para Negocios</string>
+    <string delfType="bool" name="fb_hybrid_app_events">true</string>
 </resources>

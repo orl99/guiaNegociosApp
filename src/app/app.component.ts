@@ -8,8 +8,7 @@ import { Plugins } from '@capacitor/core';
 const { AdMob } = Plugins;
 
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { ThrowStmt } from '@angular/compiler';
-
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-root',
@@ -25,14 +24,14 @@ export class AppComponent implements OnInit {
       url: 'categories',
       icon: 'book'
     },
-    {
-      title: 'Recursos',
-      url: '---',
-      icon: 'file-tray-stacked'
-    },
+    // {
+    //   title: 'Recursos',
+    //   url: 'recursos',
+    //   icon: 'file-tray-stacked'
+    // },
     {
       title: 'Sobre la app',
-      url: '--',
+      url: 'about-app',
       icon: 'information-circle'
     },
   ];
@@ -42,6 +41,7 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private appVersion: AppVersion,
+    private FB: Facebook,
   ) {
     this.initializeApp();
     AdMob.initialize('ca-app-pub-8693507653531046~7933897666');
@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
       if (this.platform.is('hybrid')) {
         this.getAppVersion();
       }
+      this.FB.activateApp();
     });
   }
 

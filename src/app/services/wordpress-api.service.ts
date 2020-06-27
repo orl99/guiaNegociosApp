@@ -1,9 +1,14 @@
+/**
+ * Created by Orlando Garcia
+ * Mio Agency Dev Team
+ */
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Models
 import { Categories } from 'src/app/models/categories.interface';
-import { Post } from '../models/post.interface';
+import { Post, OldPost } from '../models/post.interface';
 import { Tag, LiteTag } from '../models/tags.interface';
 import { LoadingController, Platform } from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
@@ -120,6 +125,31 @@ export class WordpressApiService {
       return jsonRes;
     }
     const res = await this.http$.get<Post[]>(apiUrl).toPromise();
+    await loader.dismiss();
+    return res;
+  }
+
+  /**
+   * getCustomPostType()
+   * This method is in charge of getting posts with a specific custom potst type
+   * this method use pagination so it will get 10 by 10 posts and will depend in the page number that has pageNum
+   * @param customPostType @string
+   * @param pageNum @number (page number)
+   * @returns Promise<OldPost[]>
+   */
+  public async getCustomPostType(customPostType: string, pageNum: number): Promise<OldPost[]> {
+    // const posts&cat=16&tag=3&pag=1
+    const loader = await this.loadingController.create({ message: 'loading...' });
+    await loader.present() ;
+    const apiUrl = `${this.baseApiEndpoint}${customPostType}?${pageNum}`;
+    if (this.plt.is('ios') && this.plt.is('hybrid')) {
+      const res = await this.nativeHttp.get(apiUrl, {}, {});
+      const jsonRes = JSON.parse(res.data);
+      await loader.dismiss();
+      console.log('json', jsonRes);
+      return jsonRes;
+    }
+    const res = await this.http$.get<OldPost[]>(apiUrl).toPromise();
     await loader.dismiss();
     return res;
   }

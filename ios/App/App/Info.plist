@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Guia Para Negocios</string>
+	<string>Guia Para Negocios</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -31,11 +31,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>283881516139140</string>
 	<key>FacebookDisplayName</key>
 	<string>Guia Para Negocios</string>
+	<key>FacebookHybridAppEvents</key>
+	<string>true</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-8693507653531046~6850451094</string>
 	<key>GADIsAdManagerApp</key>
