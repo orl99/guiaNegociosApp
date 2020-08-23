@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Guia Para Negocios</string>
     <string name="title_activity_main">Guia Para Negocios</string>
     <string name="package_name">com.guiaparanegocios.app</string>
@@ -7,5 +7,5 @@
     <string name="admob_app_id">ca-app-pub-8693507653531046~7933897666</string>
     <string name="fb_app_id">283881516139140</string>
     <string name="fb_app_name">Guia Para Negocios</string>
-    <string delfType="bool" name="fb_hybrid_app_events">true</string>
+    <bool name="fb_hybrid_app_events" tools:ignore="MissingDefaultResource">true</bool>
 </resources>
