@@ -21,7 +21,7 @@
 .car-title-container {
     width: 100%;
     display: block;
-    background: linear-gradient(0deg, black 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0) 100%) !important;
     padding: 10px;
     ion-card-subtitle,
     ion-card-title {
@@ -33,7 +33,7 @@ ion-card-title {
     font-size: 16px !important;
 }
 
-.cat-page-conatiner {
+.rec-page-container {
     margin-bottom: 100px;
 }
 

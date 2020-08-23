@@ -1,3 +1,4 @@
+import { DarkModeService } from './services/dark-mode.service';
 import { Component, OnInit, isDevMode } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -24,17 +25,19 @@ export class AppComponent implements OnInit {
       url: 'categories',
       icon: 'book'
     },
-    // {
-    //   title: 'Recursos',
-    //   url: 'recursos',
-    //   icon: 'file-tray-stacked'
-    // },
+    {
+      title: 'Recursos',
+      url: 'recursos',
+      icon: 'file-tray-stacked'
+    },
     {
       title: 'Sobre la app',
       url: 'about-app',
       icon: 'information-circle'
     },
   ];
+  // tslint:disable-next-line: no-inferrable-types
+  darkMode: boolean = false;
 
   constructor(
     private platform: Platform,
@@ -42,6 +45,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private appVersion: AppVersion,
     private FB: Facebook,
+    private darkModeService: DarkModeService,
   ) {
     this.initializeApp();
     AdMob.initialize('ca-app-pub-8693507653531046~7933897666');
@@ -74,5 +78,11 @@ export class AppComponent implements OnInit {
       this.versionName = `${versionNumber} Android`;
     }
     console.log('app version:', this.versionName);
+  }
+
+  cambioTheme() {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark');
+    this.darkModeService.setDarkMode( this.darkMode );
   }
 }

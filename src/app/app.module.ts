@@ -16,6 +16,8 @@ import { HttpLoaderInterceptor } from 'src/app/services/interceptors/httpLoaderI
 
 // Modules
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// Storage
+import { IonicStorageModule } from '@ionic/storage';
 
 
 // NGXS
@@ -36,6 +38,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    IonicStorageModule.forRoot()
     // NgxsModule.forRoot([
     //   // NameState
     // ]),

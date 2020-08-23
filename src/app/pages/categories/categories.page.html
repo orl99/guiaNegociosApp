@@ -3,9 +3,13 @@
     <div class="categories-main-container">
         <div class="cat-cards-container">
             <!-- Component proposal -->
-            <ion-card class="cat-card-container cat-card i-padding" *ngFor="let cat of categories" (click)="goPostsByCat(cat.id)" style="-webkit-background-size: 100%;
-                    -moz-background-size: 100%;
-                    background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + cat.image + ')' }">
+            <ion-card class="cat-card-container" 
+                      *ngFor="let cat of categories" 
+                      (click)="goPostsByCat(cat.id)" 
+                      style="-webkit-background-size: 100%;
+                             -moz-background-size: 100%;
+                             background-size: 100%;" 
+                      [ngStyle]="{'background-image' : 'url(' + cat.image + ')' }">
                 <div class="car-title-container">
                     <ion-card-title>{{cat.name}}</ion-card-title>
                     <ion-card-subtitle>{{cat.count}} Negocios</ion-card-subtitle>
@@ -13,4 +17,6 @@
             </ion-card>
         </div>
     </div>
+
 </ion-content>
+

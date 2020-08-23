@@ -2,9 +2,11 @@
 
 .cat-card-container {
     background-size: cover;
-    height: 150px;
+    background-repeat: no-repeat;
+    height: 148px;
     display: flex;
     align-items: flex-end;
+    box-shadow: none !important;
     @include md {
         height: 200px;
     }
@@ -15,13 +17,14 @@
 
 .cat-card {
     border: 8px solid white;
+    // border: 0px solid black;
     border-radius: 0;
 }
 
 .car-title-container {
     width: 100%;
     display: block;
-    background: linear-gradient(0deg, black 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0) 100%) !important;
     padding: 10px;
     ion-card-subtitle,
     ion-card-title {

@@ -1,14 +1,20 @@
 <app-header headerType="page"></app-header>
 
 <ion-content>
-    <div class="cat-cards-container">
-        <!-- Component proposal -->
-        <!-- <ion-card class="cat-card-container cat-card i-padding" *ngFor="let post of allPosts" (click)="goPost(post.id)" style="-webkit-background-size: 100%;
-                -moz-background-size: 100%;
-                background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post.featured_image_urls.large + ')' }">
-            <div class="car-title-container">
-                <ion-card-title>{{post.title}}</ion-card-title>
-            </div>
-        </ion-card> -->
+    <div class="rec-page-container">
+        <div class="cat-cards-container">
+            <!-- Component proposal -->
+            <ion-card class="cat-card-container" *ngFor="let post of allPosts" (click)="goPost(post.id)" style="-webkit-background-size: 100%;
+                    -moz-background-size: 100%;
+                    background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post['post_image'] + ')' }">
+                <div class="car-title-container">
+                    <ion-card-title>{{post.title.rendered}}</ion-card-title>
+                </div>
+            </ion-card>
+        </div>
+        <ion-infinite-scroll [disabled]="!infinityLoadingFlag" threshold="5%" position="bottom" (ionInfinite)="loadMorePost($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </div>
 </ion-content>

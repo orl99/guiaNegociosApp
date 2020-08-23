@@ -1,7 +1,12 @@
 <app-header headerType="page"></app-header>
 
 <ion-content class="ion-padding">
-  <ion-img src="assets/img/guia_para_negocios_logo.png" alt=""></ion-img>
+    <ng-container *ngIf="!darkMode; else elseTemplate">
+      <ion-img src="assets/img/guia_para_negocios_logo.png" alt="GPN logo"></ion-img>
+  </ng-container>
+  <ng-template #elseTemplate>
+      <ion-img src="assets/img/Logo-GPN-Blanco.png" alt="GPN logo"></ion-img>
+  </ng-template>
   <div class="about-content-container">
       <p>
         El App de GuiaParaNegocios.com fue creada con el propósito de presentar ideas o guías de negocios en diferentes industrias que te permitirán generar ingresos a tiempo completo o parcial.

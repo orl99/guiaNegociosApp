@@ -1,3 +1,4 @@
+import { DarkModeService } from '../../services/dark-mode.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutAppPage implements OnInit {
 
-  constructor() { }
+  public darkMode;
 
-  ngOnInit() {
+  constructor(private darkModeService: DarkModeService ) { }
+
+  async ngOnInit() {
+    this.darkMode = await this.darkModeService.getDarkModeStatus();
+    console.log(this.darkMode);
   }
 
 }

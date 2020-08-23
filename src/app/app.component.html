@@ -3,7 +3,12 @@
         <!-- Side Menu -->
         <ion-menu contentId="main-content" type="overlay">
             <div class="app-menu-logo-container">
-                <ion-img src="assets/img/guia_para_negocios_logo.png" alt=""></ion-img>
+                <ng-container *ngIf="!darkMode; else elseTemplate">
+                    <ion-img src="assets/img/guia_para_negocios_logo.png" alt="GPN logo"></ion-img>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <ion-img src="assets/img/Logo-GPN-Blanco.png" alt="GPN logo"></ion-img>
+                </ng-template>
             </div>
             <ion-content class="app-menu-lateral">
                 <ion-list id="inbox-list">
@@ -14,6 +19,15 @@
                             <ion-label>{{ p.title }}</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
+
+                    <ion-item lines="none" (click)="cambioTheme()">
+                        <ion-icon *ngIf="!darkMode" slot="start" name="moon"></ion-icon>
+                        <ion-label *ngIf="!darkMode">Act. Dark Mode</ion-label>
+
+                        <ion-icon  *ngIf="darkMode" slot="start" name="sunny"></ion-icon>
+                        <ion-label *ngIf="darkMode">Act. light Mode</ion-label>
+
+                    </ion-item>
                 </ion-list>
                 <div class="app-menu-copyright">
                     <p>

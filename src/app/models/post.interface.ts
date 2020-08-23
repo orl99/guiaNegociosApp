@@ -35,6 +35,61 @@ export interface OldPost {
     // There is more data to map in this interface, but it may not be need it in the app
 }
 
+interface ImageBaseI {
+    file: string;
+    width: number;
+    height: number;
+    mime_type: string;
+    source_url: string;
+}
+
+export interface BasePostEmbeb {
+    id: number;
+    date: string;
+    date_gmt: string;
+    guid: {
+        rendered: string;
+    };
+    modified: string;
+    modified_gmt: string;
+    slug: string;
+    status: string;
+    type: string;
+    link: string;
+    title: {
+        rendered: string;
+    };
+    content: {
+        rendered: string;
+        protected: boolean;
+    };
+    featured_media: number;
+    template: string;
+    "resource-categories": any[];
+    // post_image?: ImageBaseI;
+    _embedded: {
+        "wp:featuredmedia": [{
+            id: number;
+            date: string;
+            slug: string;
+            type: string;
+            link: string;
+            title: {rendered: string};
+            alt_text: string;
+            source_url: string;
+            media_details: {
+                sizes: {
+                    medium: ImageBaseI;
+                    thumbnail: ImageBaseI;
+                    medium_large: ImageBaseI;
+                    full: ImageBaseI;
+                }
+            }
+        }]
+    }
+}
+
+
 
 export interface Post {
     id: number;
