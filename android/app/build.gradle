@@ -7,8 +7,8 @@ android {
         applicationId "com.guiaparanegocios.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.6.1"
+        versionCode 10704
+        versionName "2.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -37,7 +37,7 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.4.3'
     implementation 'com.android.support:multidex:1.0.3'
-    //implementation 'com.android.support:design:23.2.1'
+    implementation 'com.android.support:design:23.2.1'
 
 }
 
