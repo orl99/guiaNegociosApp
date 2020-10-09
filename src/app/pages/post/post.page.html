@@ -2,8 +2,16 @@
 
 <ion-content>
     <div class="post-main-container">
+
+        
+        <div class="favorito-start"  >
+            <ion-icon  (click)="onClick()" slot="end" name="bookmark"></ion-icon>
+        </div>
+
         <div *ngIf="!!mainImage">
-            <ion-img style="padding: 2px;" [src]="mainImage"></ion-img>
+            <ion-img style="padding: 2px;" [src]="mainImage">
+            
+            </ion-img>
         </div>
         <div class="ion-padding post-container">
             <div>

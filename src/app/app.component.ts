@@ -31,11 +31,17 @@ export class AppComponent implements OnInit {
       icon: 'file-tray-stacked'
     },
     {
+      title: 'Favoritos',
+      url: 'about-app',
+      icon: 'star'
+    },
+    {
       title: 'Sobre la app',
       url: 'about-app',
       icon: 'information-circle'
-    },
+    }
   ];
+
   // tslint:disable-next-line: no-inferrable-types
   darkMode: boolean = false;
 

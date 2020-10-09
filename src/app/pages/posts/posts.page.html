@@ -15,13 +15,24 @@
         <!-- Ion-select -->
         <div class="cat-cards-container">
             <!-- Component proposal -->
-            <ion-card class="cat-card-container" *ngFor="let post of allPosts" (click)="goPost(post.id)" style="-webkit-background-size: 100%;
-                    -moz-background-size: 100%;
-                    background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post.featured_image.large + ')' }">
-                <div class="car-title-container">
-                    <ion-card-title>{{post.title}}</ion-card-title>
-                </div>
-            </ion-card>
+
+            <div *ngFor="let post of allPosts; let i = index" >
+                <ion-card class="cat-card-container" (click)="goPost(post.id)" style="-webkit-background-size: 100%;
+                        -moz-background-size: 100%;
+                        background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post.featured_image.large + ')' }">                    
+
+                    <div *ngIf=" i === 0"  class="favorito-start" >
+                        <ion-icon slot="end" name="bookmark"></ion-icon>
+                    </div>
+
+                    <div class="car-title-container">
+                        <ion-card-title>{{post.title}}</ion-card-title>
+                    </div>
+            
+                </ion-card>
+            
+            </div>
+            
         </div>
         <ng-container *ngIf="pageFilterModeFlag; else elseTemplate">
             <ion-infinite-scroll #infiLoadingEl [disabled]="!infinityLoadingFlag" threshold="5%" position="bottom" (ionInfinite)="loadMorePostByTag($event)">

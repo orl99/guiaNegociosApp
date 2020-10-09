@@ -48,4 +48,9 @@ export class PostPage implements OnInit {
     }, 100);
   }
 
+
+  onClick() {
+    console.log('Agregar a Favoritos');
+  }
+
 }
