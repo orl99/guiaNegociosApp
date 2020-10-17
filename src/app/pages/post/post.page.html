@@ -4,9 +4,14 @@
     <div class="post-main-container">
 
         
-        <div class="favorito-start"  >
+        <div *ngIf='favorito' class="favorito-start activado"  >
             <ion-icon  (click)="onClick()" slot="end" name="bookmark"></ion-icon>
         </div>
+        
+        <div *ngIf='!favorito' class="favorito-start desactivado"  >
+            <ion-icon  (click)="onClick()" slot="end" name="bookmark"></ion-icon>
+        </div>
+
 
         <div *ngIf="!!mainImage">
             <ion-img style="padding: 2px;" [src]="mainImage">

@@ -102,5 +102,13 @@ export interface Post {
         large: string;
     };
     tags: Tag[];
+    favorito?: boolean;
     // There is more data to map in this interface, but it may not be need it in the app
 }
+
+
+export interface PostFavorito {
+    id: number;
+    title: string;
+}
+

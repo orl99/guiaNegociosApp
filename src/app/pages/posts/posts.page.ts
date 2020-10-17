@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 
 // Interfaces
@@ -13,13 +13,16 @@ const { AdMob } = Plugins;
 // Ionic
 import { ToastController } from '@ionic/angular';
 
+import { FavoritosService } from '../../services/favoritos.service';
+import { PostFavorito } from '../../models/post.interface';
+
 
 @Component({
   selector: 'app-post',
   templateUrl: './posts.page.html',
   styleUrls: ['./posts.page.scss'],
 })
-export class PostPage implements OnInit, AfterViewInit {
+export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   category: number;
   allPosts: Post[] = [];
   inmutePosts: Post[] = [];
@@ -31,14 +34,22 @@ export class PostPage implements OnInit, AfterViewInit {
   pageFilterModeFlag = false;
   filterTagId: number;
 
+  favoritos: PostFavorito[] = [];
+
   // Dom elements
   @ViewChild('infiLoadingEl', { static: false }) infiLoadingEl: ElementRef;
   constructor(private wpService: WordpressApiService,
               private route: ActivatedRoute,
-              private router: Router,) {
+              private router: Router,
+              private favService: FavoritosService
+              ) {
     route.params.subscribe((params) => {
-      this.category = params['catId'];
+      this.category = params.catId;
     });
+  }
+
+  ngOnDestroy(): void {
+    console.log('Destroy Posts');
   }
 
   async ngOnInit() {
@@ -46,6 +57,8 @@ export class PostPage implements OnInit, AfterViewInit {
     const responseTags = await this.wpService.getTagsByCat(this.category);
     console.log('Tags', responseTags);
     this.allTags = responseTags;
+    this.favoritos = await this.favService.getFavoritos();
+    console.log('Post Favoritos: ', this.favoritos );
   }
 
   // TODO: TEST PERFORMANCE
@@ -63,6 +76,7 @@ export class PostPage implements OnInit, AfterViewInit {
     console.log('Response', response);
     this.inmutePosts = [...response];
     this.allPosts = [...response];
+    this.asignaFavoritos();
     console.log(this.initialPostsLenght);
     // TODO: TEST funct
     if (this.initialPostsLenght < 10) {
@@ -79,6 +93,7 @@ export class PostPage implements OnInit, AfterViewInit {
       console.log('More loaded posts', response);
       const post = [...this.allPosts];
       this.allPosts = [...post, ...response];
+      this.asignaFavoritos();
       console.log('all posts', this.allPosts);
       this.inmutePosts = [...this.allPosts];
 
@@ -102,6 +117,7 @@ export class PostPage implements OnInit, AfterViewInit {
     console.log('Response', response);
     this.inmutePosts = [...response];
     this.allPosts = [...response];
+    this.asignaFavoritos();
     // TODO: TEST funct
     if (this.initialPostsLenght < 10) {
       console.log('Infinity scroll disabled');
@@ -119,6 +135,7 @@ export class PostPage implements OnInit, AfterViewInit {
       console.log('More loaded posts by tag', response);
       const post = [...this.allPosts];
       this.allPosts = [...post, ...response];
+      this.asignaFavoritos();
       console.log('all posts by tag', this.allPosts);
       this.inmutePosts = [...this.allPosts];
       $event.target.complete();
@@ -199,6 +216,7 @@ export class PostPage implements OnInit, AfterViewInit {
     console.log('Filter', filterVal);
     if (filterVal === -1) {
       this.allPosts = [...this.inmutePosts];
+      this.asignaFavoritos();
     } else {
       // Filter post
       const allPostTemp = [...this.inmutePosts];
@@ -216,4 +234,21 @@ export class PostPage implements OnInit, AfterViewInit {
     }
   }
 
+
+
+    asignaFavoritos() {
+      if ( this.allPosts && this.favoritos ) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < this.allPosts.length; i++ ) {
+          // tslint:disable-next-line: prefer-for-of
+          for (let j = 0; j < this.favoritos.length; j++) {
+            if ( (this.allPosts[i].id == this.favoritos[j].id) && (this.allPosts[i].title == this.favoritos[j].title)  ) {
+              this.allPosts[i].favorito = true;
+              break;
+            }
+          }
+        }
+      }
+    }
 }
+

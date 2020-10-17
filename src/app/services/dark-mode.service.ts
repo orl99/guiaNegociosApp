@@ -17,7 +17,7 @@ export class DarkModeService {
     return this.darkMode;
   }
 
-  async setDarkMode( darkMode: boolean){
+  async setDarkMode( darkMode: boolean) {
     this.darkMode = darkMode;
     await this.storage.set('darkMode', darkMode) ;
   }

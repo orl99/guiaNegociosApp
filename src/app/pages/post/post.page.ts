@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
+import { FavoritosService } from '../../services/favoritos.service';
+import { PostFavorito } from '../../models/post.interface';
+import { ToastController } from '@ionic/angular';
 
 const { AdMob } = Plugins;
 
@@ -12,14 +15,26 @@ const { AdMob } = Plugins;
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss'],
 })
-export class PostPage implements OnInit {
+export class PostPage implements OnInit, OnDestroy {
   postId: number;
   mainImage: string;
   postHTML: string;
   postTitle: string;
+  favorito: boolean;
+
+  postAct: PostFavorito;
+
   constructor(private route: ActivatedRoute,
-              private wpService: WordpressApiService) {
+              private wpService: WordpressApiService,
+              // tslint:disable-next-line: no-shadowed-variable
+              private favService: FavoritosService,
+              private toastCtrl: ToastController
+              ) {
     route.params.subscribe(params => this.postId = params['postId']);
+  }
+  ngOnDestroy(): void {
+    // throw new Error('Method not implemented.');
+    console.log('OnDestroy');
   }
 
   async ngOnInit() {
@@ -29,7 +44,15 @@ export class PostPage implements OnInit {
     this.postTitle = response.title;
     this.postHTML = response.content;
     this.stylePostTags();
-    console.log(response.featured_image);
+    // console.log(response.featured_image);
+
+    this.postAct = {
+      id: Number(this.postId),
+      title: this.postTitle
+    };
+
+    this.favorito = await this.favService.isFavorito( this.postAct );
+
   }
 
   stylePostTags() {
@@ -50,7 +73,27 @@ export class PostPage implements OnInit {
 
 
   onClick() {
-    console.log('Agregar a Favoritos');
+    this.favorito = !this.favorito;
+    // console.log('Agregar a Favoritos');
+    // console.log('PostAct: ', this.postAct );
+    if ( this.favorito ) {
+      this.presentToast(`Agregando: "${this.postAct.title}" a Favoritos`);
+      this.favService.agregar( this.postAct );
+    } else {
+      this.presentToast(`Removiendo: "${this.postAct.title}" de Favoritos`);
+      this.favService.quitar( this.postAct );
+    }
+  }
+
+
+
+  async presentToast( message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 3000,
+      color: 'dark',
+    });
+    toast.present();
   }
 
 }

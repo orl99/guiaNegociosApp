@@ -15,7 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     PostPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [PostPage]
 })

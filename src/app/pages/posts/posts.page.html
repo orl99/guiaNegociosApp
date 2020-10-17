@@ -21,7 +21,7 @@
                         -moz-background-size: 100%;
                         background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post.featured_image.large + ')' }">                    
 
-                    <div *ngIf=" i === 0"  class="favorito-start" >
+                    <div *ngIf="post.favorito"  class="favorito-start" >
                         <ion-icon slot="end" name="bookmark"></ion-icon>
                     </div>
 

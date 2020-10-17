@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Favoritos',
-      url: 'about-app',
+      url: 'favoritos',
       icon: 'star'
     },
     {
