@@ -71,12 +71,12 @@ export class CategoriesPage implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     // throw new Error('Method not implemented.');
-    console.log('[categorias] onDestroy')
+    // console.log('[categorias] onDestroy')
   }
 
   async ngOnInit() {
     const res = await this.wpService.getCategories();
-    console.log('res', res);
+    // console.log('res', res);
     this.categories = res;
   }
 

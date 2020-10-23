@@ -55,7 +55,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('Destroy Posts');
+    // console.log('Destroy Posts');
 
     if ( this.favoritosSubs ) {
       this.favoritosSubs.unsubscribe();
@@ -65,14 +65,14 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   async ngOnInit() {
     // Get tags by category
     const responseTags = await this.wpService.getTagsByCat(this.category);
-    console.log('Tags', responseTags);
+    // console.log('Tags', responseTags);
     this.allTags = responseTags;
 
     this.favoritos = await this.favService.getFavoritos();
-    console.log('Post Favoritos: ', this.favoritos );
+    // console.log('Post Favoritos: ', this.favoritos );
 
     this.favoritosSubs = this.store.select('favoritos').subscribe( ({favoritos}) => {
-      console.log('Store State : ', favoritos );
+      // console.log('Store State : ', favoritos );
       this.favoritos = favoritos;
       this.asignaFavoritos();
     });
@@ -94,14 +94,14 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     // Get all the posts by category
     const response = await this.wpService.getPostsByCat(this.category, this.pageNum);
     this.initialPostsLenght = response.length;
-    console.log('Response', response);
+    // console.log('Response', response);
     this.inmutePosts = [...response];
     this.allPosts = [...response];
     this.asignaFavoritos();
-    console.log(this.initialPostsLenght);
+    // console.log(this.initialPostsLenght);
     // TODO: TEST funct
     if (this.initialPostsLenght < 10) {
-      console.log('Infinity scroll disabled');
+      // console.log('Infinity scroll disabled');
       this.infinityLoadingSwitch(false); // antes false
     }
   }
@@ -111,11 +111,11 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     this.pageNum ++;
     const response =  await this.wpService.getPostsByCat(this.category, this.pageNum);
     if ( response.length ) {
-      console.log('More loaded posts', response);
+      // console.log('More loaded posts', response);
       const post = [...this.allPosts];
       this.allPosts = [...post, ...response];
       this.asignaFavoritos();
-      console.log('all posts', this.allPosts);
+      // console.log('all posts', this.allPosts);
       this.inmutePosts = [...this.allPosts];
 
       // Get more tags
@@ -123,7 +123,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
       $event.target.complete();
     }
     if ( !response.length ) {
-      console.log('infinty loading cancel');
+      // console.log('infinty loading cancel');
       $event.target.disabled = true;
     }
   }
@@ -135,14 +135,14 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     // Get all the posts by category
     const response = await this.wpService.getPostByCatAndTags(this.category, tagId, this.pageNum);
     this.initialPostsLenght = response.length;
-    console.log('Response', response);
+    // console.log('Response', response);
     this.inmutePosts = [...response];
     this.allPosts = [...response];
     this.asignaFavoritos();
     // TODO: TEST funct
     if (this.initialPostsLenght < 10) {
-      console.log('Infinity scroll disabled');
-      this.infinityLoadingSwitch(false); //antes false
+      // console.log('Infinity scroll disabled');
+      this.infinityLoadingSwitch(false); // antes false
     }
   }
 
@@ -151,18 +151,18 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     // load more post by tag
     this.pageNum++;
     const response = await this.wpService.getPostByCatAndTags(this.category, this.filterTagId, this.pageNum);
-    console.log('FilterVars', response);
+    // console.log('FilterVars', response);
     if ( response.length ) {
-      console.log('More loaded posts by tag', response);
+      // console.log('More loaded posts by tag', response);
       const post = [...this.allPosts];
       this.allPosts = [...post, ...response];
       this.asignaFavoritos();
-      console.log('all posts by tag', this.allPosts);
+      // console.log('all posts by tag', this.allPosts);
       this.inmutePosts = [...this.allPosts];
       $event.target.complete();
     }
     if ( !response.length ) {
-      console.log('infinty loading cancel');
+      // console.log('infinty loading cancel');
       $event.target.disabled = true;
     }
   }
@@ -176,13 +176,13 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     this.pageNum = 1;
     this.allPosts = [];
     this.inmutePosts = [];
-    console.log('filterval', filterVal);
+    // console.log('filterval', filterVal);
     // tslint:disable-next-line: triple-equals
     if (filterVal == -1) {
       this.filterTagId = 0;
       this.pageFilterModeFlag = false;
       // Normal posts
-      console.log('Normal post');
+      // console.log('Normal post');
       this.loadPosts();
     } else {
       this.filterTagId = filterVal;
@@ -200,7 +200,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   // Inifinity loading switch
   private infinityLoadingSwitch(status: boolean) {
     (status) ? this.infinityLoadingFlag = true  : this.infinityLoadingFlag = false;
-    console.log('INFINITY LOADING', status );
+    // console.log('INFINITY LOADING', status );
   }
 
   // Decripted methods ---------------------------------------------------------------------------------->

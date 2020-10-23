@@ -45,7 +45,7 @@ export class PostPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     const response = await this.wpService.getPost(this.postId);
-    console.log('Response', response);
+    // console.log('Response', response);
     this.mainImage = response.featured_image.large;
     this.postTitle = response.title;
     this.postHTML = response.content;

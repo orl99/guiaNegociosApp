@@ -6,7 +6,7 @@
             <!-- Component proposal -->
             <ion-card class="cat-card-container" *ngFor="let post of allPosts" (click)="goPost(post.id)" style="-webkit-background-size: 100%;
                     -moz-background-size: 100%;
-                    background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post['post_image'] + ')' }">
+                    background-size: 100%;"  [ngStyle]="{'background-image' : 'url(' + post['post_image'] + ')' }">
                 <div class="car-title-container">
                     <ion-card-title>{{post.title.rendered}}</ion-card-title>
                 </div>

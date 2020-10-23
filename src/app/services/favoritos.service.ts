@@ -26,7 +26,7 @@ export class FavoritosService {
   }
 
   async agregar( post: PostFavorito ) {
-    console.log('Agregando Post a Favoritos..: ', post );
+    // console.log('Agregando Post a Favoritos..: ', post );
 
     if ( !( this.isFavorito( post ) ) ) {
       if ( ! this.favoritos) {
@@ -45,7 +45,7 @@ export class FavoritosService {
 
 
   async quitar( post: PostFavorito ) {
-    console.log('Quitando Post de Favoritos: ', post);
+    // console.log('Quitando Post de Favoritos: ', post);
     if ( this.isFavorito( post ) ) {
       this.favoritos = this.favoritos.filter( fav => ( (fav.id !== post.id) && (fav.title !== post.title) ) );
       await this.storage.set('favoritos', this.favoritos );
@@ -75,21 +75,21 @@ export class FavoritosService {
 
   async cargarFavoritos() {
     const datos = await this.storage.get( 'favoritos');
-    console.log('Datos del Storage');
-    console.log( datos );
+    // console.log('Datos del Storage');
+    // console.log( datos );
     if ( datos ) {
       this.favoritos = datos;
     } else {
       this.favoritos = [];
     }
-    console.log('cargando Favoritos:', this.favoritos );
+    // console.log('cargando Favoritos:', this.favoritos );
     this.store.dispatch( setFavoritos( {favoritos: [...this.favoritos]} ));
     // console.log('favoritos', this.favoritos );
   }
 
 
   async favoritosWordPress() {
-    console.log('Info. de Post Favoritos: ');
+    // console.log('Info. de Post Favoritos: ');
     const loader = await this.loadingCtrl.create({ message: 'loading...' });
     await loader.present();
     // tslint:disable-next-line: prefer-const
