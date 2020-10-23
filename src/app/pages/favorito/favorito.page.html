@@ -22,7 +22,7 @@
             <div>
                 <h1 class="main-title">{{postTitle}}</h1>
             </div>
-            <div [innerHTML]="postHTML"></div>
+            <div [innerHTML]="postHTML | domSanitizer"></div>
         </div>
     </div>
 </ion-content>

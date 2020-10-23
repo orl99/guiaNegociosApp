@@ -38,15 +38,12 @@ export class FavoritosPage implements OnInit, OnDestroy {
 
     this.postFavSubs = this.store.select('favoritos').subscribe( async ({favoritos}) => {
       this.postsFav = favoritos;
-      console.log('PostFavoritos:', this.postsFav );
+      // console.log('PostFavoritos:', this.postsFav );
       this.allPosts = await this.favService.favoritosWordPress();
 
     });
-
-
     this.allPosts = await this.favService.favoritosWordPress();
-
-    console.log('All Post Favoritos: ', this.allPosts );
+    // console.log('All Post Favoritos: ', this.allPosts );
   }
 
   async gofavorito(postId: number) {
