@@ -1,7 +1,7 @@
 <app-header headerType="page"></app-header>
 
 <ion-content>
-    <div class="post-main-container">
+    <div *ngIf="postHTML && postTitle" class="post-main-container">
 
         
         <div *ngIf='favorito' class="favorito-start activado"  >

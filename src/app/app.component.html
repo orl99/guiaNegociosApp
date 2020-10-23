@@ -12,11 +12,13 @@
             </div>
             <ion-content class="app-menu-lateral">
                 <ion-list id="inbox-list">
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-                        <ion-item (click)="selectedIndex = 0" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-                            <!-- <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i"></ion-item> -->
-                            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                            <ion-label>{{ p.title }}</ion-label>
+                    <ion-menu-toggle auto-hide="false" >
+                        <ion-item *ngFor="let p of appPages; let i = index" (click)="selectedIndex = i" 
+                            [routerLink]="[p.url]" routerDirection="root" routerLinkActive="active" 
+                            lines="none" detail="false"  [class.selected]="selectedIndex == i">
+                                <!-- <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i"></ion-item> -->
+                                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                                <ion-label>{{ p.title }}</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
 

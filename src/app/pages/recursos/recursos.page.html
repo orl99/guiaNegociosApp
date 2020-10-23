@@ -7,6 +7,12 @@
             <ion-card class="cat-card-container" *ngFor="let post of allPosts" (click)="goPost(post.id)" style="-webkit-background-size: 100%;
                     -moz-background-size: 100%;
                     background-size: 100%;"  [ngStyle]="{'background-image' : 'url(' + post['post_image'] + ')' }">
+
+
+                <div *ngIf="post.favorito"  class="favorito-start" >
+                    <ion-icon slot="end" name="bookmark"></ion-icon>
+                </div>  
+                                  
                 <div class="car-title-container">
                     <ion-card-title>{{post.title.rendered}}</ion-card-title>
                 </div>

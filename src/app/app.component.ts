@@ -18,7 +18,7 @@ import { FavoritosService } from './services/favoritos.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
+  public selectedIndex = 1;
   public versionName: string;
   public appPages = [
     {

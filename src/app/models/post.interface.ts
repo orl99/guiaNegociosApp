@@ -44,6 +44,7 @@ interface ImageBaseI {
 }
 
 export interface BasePostEmbeb {
+    favorito?: boolean;
     id: number;
     date: string;
     date_gmt: string;
