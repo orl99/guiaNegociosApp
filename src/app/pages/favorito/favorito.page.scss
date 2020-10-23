@@ -1,0 +1,53 @@
+@import 'src/theme/mediaQueries.scss';
+img {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.main-title {
+    // text-align: center;
+    margin: 0;
+}
+
+.preTagStyle {
+    white-space: pre-wrap !important;
+    font-size: 0.9em !important;
+}
+
+.post-main-container {
+    margin-bottom: 80px;
+}
+
+.post-container{
+    padding: 16px;
+    @include md {
+        padding: 16px 8%;
+    }
+}
+
+
+
+// .btn-favorito {
+//     font-size: 25px !important;
+//     position: absolute;
+//     right: 0px;
+//     top: 0px;
+//     color: yellow;
+
+// }
+
+.favorito-start {
+    font-size: 28px !important;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    color: yellow;
+}
+
+.activado {
+    color: yellow;
+}
+
+.desactivado {
+    color: gray;
+}

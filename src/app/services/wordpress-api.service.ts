@@ -81,6 +81,23 @@ export class WordpressApiService {
     }
   }
 
+
+  public async getPost2(postID: number): Promise<Post> {
+    // const loader = await this.loadingController.create({ message: 'loading...' });
+    // await loader.present();
+    if (this.plt.is('ios') && this.plt.is('hybrid')) {
+      const res = await this.nativeHttp.get(`${this.customApiEndpoint}post/${postID}`, {}, {});
+      const jsonRes = JSON.parse(res.data);
+      // await loader.dismiss();
+      console.log('json', jsonRes);
+      return jsonRes;
+    } else {
+      const res = await this.http$.get<Post>(`${this.customApiEndpoint}post/${postID}`).toPromise();
+      // await loader.dismiss();
+      return res;
+    }
+  }
+
   public async getTags(): Promise<Tag[]> {
     const loader = await this.loadingController.create({ message: 'loading...' });
     await loader.present() ;
@@ -150,19 +167,31 @@ export class WordpressApiService {
       console.log('ios get post')
       jsonRes.forEach(async (post) => {
         console.log('POST IOS IMAGES');
-        const imge = post._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large.source_url;
+        let imge = null;
+        if ( !(post._embedded )  ) {
+          console.log('El POST no contiene imagen.');
+        } else {
+          imge = post._embedded['wp:featuredmedia'][0].media_details.sizes.medium_large.source_url;
+        }
+        // tslint:disable-next-line: no-string-literal
         post['post_image'] = imge;
       });
       await loader.dismiss();
-      console.log('json', jsonRes);
+      // console.log('json', jsonRes);
       return jsonRes;
     }
     const res = await this.http$.get<BasePostEmbeb[]>(apiUrl).toPromise();
     res.forEach(async (post) => {
-      const imge = post._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large.source_url;
+      let imge = null;
+      // console.log('POST: ', post );
+      if ( !(post._embedded )  ) {
+        console.log('El POST no contiene imagen.');
+      } else {
+        imge = post._embedded['wp:featuredmedia'][0].media_details.sizes.medium_large.source_url;
+      }
       post['post_image'] = imge;
     });
-    console.log('res', res);
+    // console.log('res', res);
     await loader.dismiss();
     return res;
   }

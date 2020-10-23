@@ -16,6 +16,10 @@ import { ToastController } from '@ionic/angular';
 import { FavoritosService } from '../../services/favoritos.service';
 import { PostFavorito } from '../../models/post.interface';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-post',
@@ -34,14 +38,16 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   pageFilterModeFlag = false;
   filterTagId: number;
 
-  favoritos: PostFavorito[] = [];
 
+  favoritos: PostFavorito[] = [];
+  favoritosSubs: Subscription;
   // Dom elements
   @ViewChild('infiLoadingEl', { static: false }) infiLoadingEl: ElementRef;
   constructor(private wpService: WordpressApiService,
               private route: ActivatedRoute,
               private router: Router,
-              private favService: FavoritosService
+              private favService: FavoritosService,
+              private store: Store<AppState>
               ) {
     route.params.subscribe((params) => {
       this.category = params.catId;
@@ -50,6 +56,10 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('Destroy Posts');
+
+    if ( this.favoritosSubs ) {
+      this.favoritosSubs.unsubscribe();
+    }
   }
 
   async ngOnInit() {
@@ -57,8 +67,19 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     const responseTags = await this.wpService.getTagsByCat(this.category);
     console.log('Tags', responseTags);
     this.allTags = responseTags;
+
     this.favoritos = await this.favService.getFavoritos();
     console.log('Post Favoritos: ', this.favoritos );
+
+    this.favoritosSubs = this.store.select('favoritos').subscribe( ({favoritos}) => {
+      console.log('Store State : ', favoritos );
+      this.favoritos = favoritos;
+      this.asignaFavoritos();
+    });
+
+    this.infinityLoadingSwitch(true); // Nuevo
+
+
   }
 
   // TODO: TEST PERFORMANCE
@@ -81,7 +102,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     // TODO: TEST funct
     if (this.initialPostsLenght < 10) {
       console.log('Infinity scroll disabled');
-      this.infinityLoadingSwitch(false);
+      this.infinityLoadingSwitch(false); // antes false
     }
   }
 
@@ -121,7 +142,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
     // TODO: TEST funct
     if (this.initialPostsLenght < 10) {
       console.log('Infinity scroll disabled');
-      this.infinityLoadingSwitch(false);
+      this.infinityLoadingSwitch(false); //antes false
     }
   }
 
@@ -179,6 +200,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   // Inifinity loading switch
   private infinityLoadingSwitch(status: boolean) {
     (status) ? this.infinityLoadingFlag = true  : this.infinityLoadingFlag = false;
+    console.log('INFINITY LOADING', status );
   }
 
   // Decripted methods ---------------------------------------------------------------------------------->
@@ -240,6 +262,7 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
       if ( this.allPosts && this.favoritos ) {
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.allPosts.length; i++ ) {
+          this.allPosts[i].favorito = false;
           // tslint:disable-next-line: prefer-for-of
           for (let j = 0; j < this.favoritos.length; j++) {
             if ( (this.allPosts[i].id == this.favoritos[j].id) && (this.allPosts[i].title == this.favoritos[j].title)  ) {

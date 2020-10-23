@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 
 // AdMob ionic plugs
@@ -14,12 +15,16 @@ import { AppState } from '../../store/app.reducers';
 
 const { AdMob } = Plugins;
 
+
+
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.page.html',
-  styleUrls: ['./post.page.scss'],
+  selector: 'app-favorito',
+  templateUrl: './favorito.page.html',
+  styleUrls: ['./favorito.page.scss'],
 })
-export class PostPage implements OnInit, OnDestroy {
+
+
+export class FavoritoPage implements OnInit {
   postId: number;
   mainImage: string;
   postHTML: string;
@@ -28,19 +33,15 @@ export class PostPage implements OnInit, OnDestroy {
 
   postAct: PostFavorito;
 
-  constructor(private route: ActivatedRoute,
-              private wpService: WordpressApiService,
-              // tslint:disable-next-line: no-shadowed-variable
-              private toastCtrl: ToastController,
-              private favService: FavoritosService,
-              private store: Store<AppState>,
-
+  constructor( private route: ActivatedRoute,
+               private wpService: WordpressApiService,
+               // tslint:disable-next-line: no-shadowed-variable
+               private toastCtrl: ToastController,
+               private favService: FavoritosService,
+               private store: Store<AppState>,
               ) {
+    // tslint:disable-next-line: no-string-literal
     route.params.subscribe(params => this.postId = params['postId']);
-  }
-  ngOnDestroy(): void {
-    // throw new Error('Method not implemented.');
-    // console.log('OnDestroy');
   }
 
   async ngOnInit() {
@@ -78,6 +79,7 @@ export class PostPage implements OnInit, OnDestroy {
   }
 
 
+  
   onClick() {
     this.favorito = !this.favorito;
     if ( this.favorito ) {
@@ -99,5 +101,7 @@ export class PostPage implements OnInit, OnDestroy {
     });
     toast.present();
   }
+
+
 
 }

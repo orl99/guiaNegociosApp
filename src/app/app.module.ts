@@ -30,6 +30,13 @@ import { HTTP } from '@ionic-native/http/ngx';
 
 import { Facebook } from '@ionic-native/facebook/ngx';
 
+// ngrx
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store/app.reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,12 +45,19 @@ import { Facebook } from '@ionic-native/facebook/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
     // NgxsModule.forRoot([
     //   // NameState
     // ]),
     // NgxsReduxDevtoolsPluginModule.forRoot(),
     // NgxsLoggerPluginModule.forRoot()
+
+    StoreModule.forRoot( appReducers ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
+
   ],
   providers: [
     StatusBar,

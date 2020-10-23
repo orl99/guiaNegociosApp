@@ -1,5 +1,31 @@
 <app-header headerType="main"></app-header>
 
 <ion-content>
+    <div class="cat-page-conatiner">
+        
 
+        <!-- Ion-select -->
+        <div class="cat-cards-container">
+            <!-- Component proposal -->
+
+            <div *ngFor="let post of allPosts; let i = index" >
+                <ion-card class="cat-card-container" (click)="gofavorito(post.id)" style="-webkit-background-size: 100%;
+                        -moz-background-size: 100%;
+                        background-size: 100%;" [ngStyle]="{'background-image' : 'url(' + post.featured_image.large + ')' }">                    
+
+                    <div *ngIf="post.favorito"  class="favorito-start" >
+                        <ion-icon slot="end" name="bookmark"></ion-icon>
+                    </div>
+
+                    <div class="car-title-container">
+                        <ion-card-title>{{post.title}}</ion-card-title>
+                    </div>
+            
+                </ion-card>
+            
+            </div>
+            
+        </div>
+        
+    </div>
 </ion-content>

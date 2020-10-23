@@ -10,6 +10,7 @@ const { AdMob } = Plugins;
 
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { FavoritosService } from './services/favoritos.service';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
     private appVersion: AppVersion,
     private FB: Facebook,
     private darkModeService: DarkModeService,
+    private favService: FavoritosService,
   ) {
     this.initializeApp();
     AdMob.initialize('ca-app-pub-8693507653531046~7933897666');
@@ -73,7 +75,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.favService.cargarFavoritos();
+  }
 
   async getAppVersion() {
     const versionNumber =  await this.appVersion.getVersionNumber();

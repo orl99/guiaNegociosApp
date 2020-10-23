@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 import { Categories } from 'src/app/models/categories.interface';
@@ -17,12 +17,15 @@ const { AdMob } = Plugins;
 // Envs
 import { environment } from 'src/environments/environment';
 
+// Posts Favoritos
+import { FavoritosService } from '../../services/favoritos.service';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.page.html',
   styleUrls: ['./categories.page.scss'],
 })
-export class CategoriesPage implements OnInit {
+export class CategoriesPage implements OnInit, OnDestroy {
   categories: Categories[];
   // AdMob Options for categories for Android
   private AdMobOptionsAndroid: AdOptions = {
@@ -42,7 +45,9 @@ export class CategoriesPage implements OnInit {
   constructor(
       private wpService: WordpressApiService,
       private router: Router,
-      private plt: Platform) {
+      private plt: Platform,
+      private favService: FavoritosService,
+      ) {
       if (plt.is('hybrid') && plt.is("android")) {
         AdMob.showBanner(this.AdMobOptionsAndroid);
         AdMob.addListener('onAdLoaded', () => {
@@ -61,6 +66,12 @@ export class CategoriesPage implements OnInit {
           console.log('AdMob size', info);
         });
       }
+
+      // this.favService.cargarFavoritos();
+  }
+  ngOnDestroy(): void {
+    // throw new Error('Method not implemented.');
+    console.log('[categorias] onDestroy')
   }
 
   async ngOnInit() {

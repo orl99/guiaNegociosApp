@@ -1,0 +1,28 @@
+<app-header headerType="page"></app-header>
+
+<ion-content>
+    <div class="post-main-container">
+
+        
+        <div *ngIf='favorito' class="favorito-start activado"  >
+            <ion-icon  (click)="onClick()" slot="end" name="bookmark"></ion-icon>
+        </div>
+        
+        <div *ngIf='!favorito' class="favorito-start desactivado"  >
+            <ion-icon  (click)="onClick()" slot="end" name="bookmark"></ion-icon>
+        </div>
+
+
+        <div *ngIf="!!mainImage">
+            <ion-img style="padding: 2px;" [src]="mainImage">
+            
+            </ion-img>
+        </div>
+        <div class="ion-padding post-container">
+            <div>
+                <h1 class="main-title">{{postTitle}}</h1>
+            </div>
+            <div [innerHTML]="postHTML"></div>
+        </div>
+    </div>
+</ion-content>

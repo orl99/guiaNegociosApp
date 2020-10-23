@@ -51,6 +51,7 @@ export class RecursosPage implements OnInit {
       console.log('Infinity loading cancel');
       $event.target.disabled = true;
     }
+    $event.target.complete();
   }
 
 }
