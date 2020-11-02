@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { FavoritosService } from '../../services/favoritos.service';
-import { Post, PostFavorito } from '../../models/post.interface';
+import { FavoritosService } from '../../../services/favoritos.service';
+import { Post, PostFavorito } from '../../../models/post.interface';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.reducers';
+import { AppState } from '../../../store/app.reducers';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 

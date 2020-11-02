@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // services http
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 // Models
 import { BasePostEmbeb, PostFavorito } from 'src/app/models/post.interface';
@@ -16,7 +17,7 @@ import { AppState } from 'src/app/store/app.reducers';
   styleUrls: ['./recursos.page.scss'],
 })
 export class RecursosPage implements OnInit, OnDestroy {
-
+  category: number;
   pageNum = 1;
   allPosts: BasePostEmbeb[];
   infinityLoadingFlag = true;
@@ -28,9 +29,16 @@ export class RecursosPage implements OnInit, OnDestroy {
 
   constructor(private wpservce: WordpressApiService,
               private router: Router,
+              private route: ActivatedRoute,
               private favService: FavoritosService,
               private store: Store<AppState>
-              ) { }
+              ) {
+
+    route.params.subscribe((params) => {
+      this.category = params.catId;
+      // console.log(params.catId);
+    });
+  }
 
 
   ngOnDestroy(): void {
@@ -40,7 +48,7 @@ export class RecursosPage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    const response = await this.wpservce.getCustomPostType('recursos', this.pageNum);
+    const response = await this.wpservce.getCustomPostType('recursos', this.category, this.pageNum);
     // console.log('res', response);
     this.allPosts = response;
 
@@ -59,12 +67,12 @@ export class RecursosPage implements OnInit, OnDestroy {
   }
 
   public goPost(catId: number) {
-    this.router.navigate(['categories/post/', catId]);
+    this.router.navigate(['recursos/recurso/', catId]);
   }
 
   public async loadMorePost($event: any) {
     this.pageNum ++;
-    const response = await this.wpservce.getCustomPostType('recursos', this.pageNum);
+    const response = await this.wpservce.getCustomPostType('recursos', this.category, this.pageNum);
     // console.log('res', response);
     if (response.length) {
       // console.log('More loaded post', response);

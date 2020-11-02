@@ -8,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
   // pageNameTem: string;
   // @Input() pageName: string;
-  toolTipType: 'main' | 'page' | 'favorito';
-  @Input() headerType: 'main' | 'page' | 'favorito';
+  toolTipType: 'main' | 'page' | 'favorito' | 'recursos';
+  @Input() headerType: 'main' | 'page' | 'favorito' | 'recursos';
   constructor() { }
 
   ngOnInit() {

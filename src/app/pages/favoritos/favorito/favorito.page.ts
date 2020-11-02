@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { WordpressApiService } from 'src/app/services/wordpress-api.service';
+import { WordpressApiService } from '../../../services/wordpress-api.service';
 
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
-import { FavoritosService } from '../../services/favoritos.service';
+import { FavoritosService } from '../../../services/favoritos.service';
 
-import { PostFavorito } from '../../models/post.interface';
+import { PostFavorito } from '../../../models/post.interface';
 import { ToastController } from '@ionic/angular';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.reducers';
+import { AppState } from '../../../store/app.reducers';
 
 const { AdMob } = Plugins;
 

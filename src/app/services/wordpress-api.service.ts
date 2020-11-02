@@ -30,19 +30,19 @@ export class WordpressApiService {
   /**
    * getCategories
    */
-  public async getCategories(): Promise<Categories[]> {
+  public async getCategories( ruta: string ): Promise<Categories[]> {
     const loader = await this.loadingController.create({ message: 'loading...' });
     await loader.present();
     if (this.plt.is('ios') && this.plt.is('hybrid')) {
       console.log('IOS ON');
-      const res = await this.nativeHttp.get(`${this.customApiEndpoint}categories`, {}, {});
+      const res = await this.nativeHttp.get(`${this.customApiEndpoint}${ ruta }`, {}, {});
       const jsonRes = JSON.parse(res.data);
       await loader.dismiss();
       console.log('json', jsonRes);
       return jsonRes;
     } else {
       // Code goes here
-      const res = await this.http$.get<Categories[]>(`${this.customApiEndpoint}categories`).toPromise();
+      const res = await this.http$.get<Categories[]>(`${this.customApiEndpoint}${ ruta }`).toPromise();
       await loader.dismiss();
       return res;
     }
@@ -155,11 +155,12 @@ export class WordpressApiService {
    * @param pageNum @number (page number)
    * @returns Promise<OldPost[]>
    */
-  public async getCustomPostType(customPostType: string, pageNum: number): Promise<BasePostEmbeb[]> {
+  public async getCustomPostType(customPostType: string, resourceCat: number, pageNum: number): Promise<BasePostEmbeb[]> {
 
     const loader = await this.loadingController.create({ message: 'loading...' });
     await loader.present() ;
-    const apiUrl = `https://guiaparanegocios.net/wp-json/wp/v2/recursos?_embed&page=${pageNum}`;
+    // tslint:disable-next-line: max-line-length
+    const apiUrl = `https://guiaparanegocios.net/wp-json/wp/v2/${customPostType}?_embed&resource-categories=${ resourceCat }&page=${ pageNum }`;
     // const apiUrl = `${this.baseApiEndpoint}${customPostType}?per_page=10&page=${pageNum}&_embed`;
     if (this.plt.is('ios') && this.plt.is('hybrid')) {
       const res = await this.nativeHttp.get(apiUrl, {}, {});

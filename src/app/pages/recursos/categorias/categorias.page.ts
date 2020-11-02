@@ -1,14 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 import { Categories } from 'src/app/models/categories.interface';
 import { Router } from '@angular/router';
 
-
 // AdMob ionic plugs
 import { Plugins } from '@capacitor/core';
-import { AdOptions, AdSize, AdPosition } from "capacitor-admob";
-
+import { AdOptions, AdSize, AdPosition } from 'capacitor-admob';
 
 // ionic
 import { Platform } from '@ionic/angular';
@@ -18,14 +16,16 @@ const { AdMob } = Plugins;
 import { environment } from 'src/environments/environment';
 
 // Posts Favoritos
-import { FavoritosService } from '../../services/favoritos.service';
+import { FavoritosService } from '../../../services/favoritos.service';
+
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.page.html',
-  styleUrls: ['./categories.page.scss'],
+  selector: 'app-categorias',
+  templateUrl: './categorias.page.html',
+  styleUrls: ['./categorias.page.scss'],
 })
-export class CategoriesPage implements OnInit, OnDestroy {
+export class CategoriasPage implements OnInit {
+
   categories: Categories[];
   // AdMob Options for categories for Android
   private AdMobOptionsAndroid: AdOptions = {
@@ -43,45 +43,41 @@ export class CategoriesPage implements OnInit, OnDestroy {
   };
 
   constructor(
-      private wpService: WordpressApiService,
-      private router: Router,
-      private plt: Platform,
-      private favService: FavoritosService,
-      ) {
-      if (plt.is('hybrid') && plt.is("android")) {
-        AdMob.showBanner(this.AdMobOptionsAndroid);
-        AdMob.addListener('onAdLoaded', () => {
-          console.log('AdMob banner loaded in Android');
-        });
-        AdMob.addListener('onAdSize', (info: boolean) => {
-          console.log('AdMob size', info);
-        });
-      }
-      if (plt.is('hybrid') && plt.is("ios")) {
-        AdMob.showBanner(this.AdMobOptionsios);
-        AdMob.addListener('onAdLoaded', () => {
-          console.log('AdMob banner loaded in iOS');
-        });
-        AdMob.addListener('onAdSize', (info: boolean) => {
-          console.log('AdMob size', info);
-        });
-      }
+    private wpService: WordpressApiService,
+    private router: Router,
+    private plt: Platform,
+    private favService: FavoritosService,
+    ) {
+    if (plt.is('hybrid') && plt.is('android')) {
+      AdMob.showBanner(this.AdMobOptionsAndroid);
+      AdMob.addListener('onAdLoaded', () => {
+        console.log('AdMob banner loaded in Android');
+      });
+      AdMob.addListener('onAdSize', (info: boolean) => {
+        console.log('AdMob size', info);
+      });
+    }
+    if (plt.is('hybrid') && plt.is('ios')) {
+      AdMob.showBanner(this.AdMobOptionsios);
+      AdMob.addListener('onAdLoaded', () => {
+        console.log('AdMob banner loaded in iOS');
+      });
+      AdMob.addListener('onAdSize', (info: boolean) => {
+        console.log('AdMob size', info);
+      });
+    }
 
-      // this.favService.cargarFavoritos();
-  }
-  ngOnDestroy(): void {
-    // throw new Error('Method not implemented.');
-    // console.log('[categorias] onDestroy')
-  }
+    // this.favService.cargarFavoritos();
+}
 
   async ngOnInit() {
-    const res = await this.wpService.getCategories('categories');
+    const res = await this.wpService.getCategories('resource-categories');
     // console.log('res', res);
     this.categories = res;
   }
 
   public goPostsByCat(catId: number) {
-    this.router.navigate(['categories/posts/', catId]);
+    this.router.navigate(['recursos/recursos/', catId]);
   }
 
   public closeBannerAd() {

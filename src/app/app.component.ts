@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Recursos',
-      url: 'recursos',
+      url: 'recursos/categorias',
       icon: 'file-tray-stacked'
     },
     {

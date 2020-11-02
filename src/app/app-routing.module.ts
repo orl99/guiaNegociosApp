@@ -20,21 +20,31 @@ const routes: Routes = [
     loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
   },
   {
-    path: 'recursos',
-    loadChildren: () => import('./pages/recursos/recursos.module').then( m => m.RecursosPageModule)
-  },
-  {
     path: 'about-app',
     loadChildren: () => import('./pages/about-app/about-app.module').then( m => m.AboutAppPageModule)
   },
   {
     path: 'favoritos',
-    loadChildren: () => import('./pages/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+    loadChildren: () => import('./pages/favoritos/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
   },
   {
     path: 'favorito/:postId',
-    loadChildren: () => import('./pages/favorito/favorito.module').then( m => m.FavoritoPageModule)
-  }
+    loadChildren: () => import('./pages/favoritos/favorito/favorito.module').then( m => m.FavoritoPageModule)
+  },
+  {
+    path: 'recursos/categorias',
+    loadChildren: () => import('./pages/recursos/categorias/categorias.module').then( m => m.CategoriasPageModule)
+  },
+  {
+    path: 'recursos/recursos/:catId',
+    loadChildren: () => import('./pages/recursos/recursos/recursos.module').then( m => m.RecursosPageModule)
+  },
+  {
+    path: 'recursos/recurso/:postId',
+    loadChildren: () => import('./pages/recursos/recurso/recurso.module').then( m => m.RecursoPageModule)
+  },
+
+
 ];
 
 @NgModule({
