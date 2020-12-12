@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
 import { WordpressApiService } from 'src/app/services/wordpress-api.service';
 import { Categories } from 'src/app/models/categories.interface';
@@ -11,7 +11,8 @@ import { AdOptions, AdSize, AdPosition } from "capacitor-admob";
 
 
 // ionic
-import { Platform } from '@ionic/angular';
+import { IonInfiniteScroll, Platform } from '@ionic/angular';
+
 const { AdMob } = Plugins;
 
 // Envs
@@ -20,13 +21,23 @@ import { environment } from 'src/environments/environment';
 // Posts Favoritos
 import { FavoritosService } from '../../services/favoritos.service';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducers';
+import { setPage } from '../../store/actions/menu.actions';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.page.html',
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit, OnDestroy {
+
+  @ViewChild(IonInfiniteScroll, {static: false}) infitniteScroll: IonInfiniteScroll;
+
+
   categories: Categories[];
+  categoriesToShow: Categories[];
+
   // AdMob Options for categories for Android
   private AdMobOptionsAndroid: AdOptions = {
     adId: 'ca-app-pub-8693507653531046/2409629315',
@@ -42,13 +53,16 @@ export class CategoriesPage implements OnInit, OnDestroy {
     isTesting: environment.adMobTesting,
   };
 
+  limitOfCategories: number = 8;
+
   constructor(
       private wpService: WordpressApiService,
       private router: Router,
       private plt: Platform,
       private favService: FavoritosService,
+      private store: Store<AppState>
       ) {
-      if (plt.is('hybrid') && plt.is("android")) {
+      if (plt.is('hybrid') && plt.is('android')) {
         AdMob.showBanner(this.AdMobOptionsAndroid);
         AdMob.addListener('onAdLoaded', () => {
           console.log('AdMob banner loaded in Android');
@@ -57,7 +71,7 @@ export class CategoriesPage implements OnInit, OnDestroy {
           console.log('AdMob size', info);
         });
       }
-      if (plt.is('hybrid') && plt.is("ios")) {
+      if (plt.is('hybrid') && plt.is('ios')) {
         AdMob.showBanner(this.AdMobOptionsios);
         AdMob.addListener('onAdLoaded', () => {
           console.log('AdMob banner loaded in iOS');
@@ -75,9 +89,27 @@ export class CategoriesPage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.store.dispatch( setPage({ page: 'Guias'}) );
+
     const res = await this.wpService.getCategories('categories');
     // console.log('res', res);
-    this.categories = res;
+    this.categoriesToShow = res;
+    this.categories = this.categoriesToShow.slice(0, this.limitOfCategories );
+
+    const a = [0,1,2,3,4,5,6,7];
+    const b = a.slice(0,20);
+    console.log('a', a)
+    console.log('a', b)
+    
+  }
+
+
+  loadData( event ) {
+    console.log('Cargando siguientes...');
+
+    this.limitOfCategories += 8;
+    this.categories = this.categoriesToShow.slice(0, this.limitOfCategories );
+
   }
 
   public goPostsByCat(catId: number) {

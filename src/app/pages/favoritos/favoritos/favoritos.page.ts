@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducers';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { setPage } from '../../../store/actions/menu.actions';
 
 @Component({
   selector: 'app-favoritos',
@@ -33,6 +34,8 @@ export class FavoritosPage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.store.dispatch( setPage({ page: 'Favoritos'}) );
+
     this.postsFav  = await this.favService.getFavoritos();
     // console.log( this.postsFav );
 

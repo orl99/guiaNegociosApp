@@ -12,6 +12,7 @@ import { ToastController } from '@ionic/angular';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducers';
+import { setPage } from 'src/app/store/actions/menu.actions';
 
 const { AdMob } = Plugins;
 
@@ -45,6 +46,7 @@ export class FavoritoPage implements OnInit {
   }
 
   async ngOnInit() {
+    this.store.dispatch( setPage({ page: 'Favoritos'}) );
     const response = await this.wpService.getPost(this.postId);
     // console.log('Response', response);
     this.mainImage = response.featured_image.large;

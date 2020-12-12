@@ -1,5 +1,4 @@
 
-
 import { createReducer, on } from '@ngrx/store';
 import { setPage } from '../actions/menu.actions';
 
@@ -13,7 +12,6 @@ export const initialState: MenuState = {
 
 // tslint:disable-next-line: variable-name
 const _menuReducer = createReducer(initialState,
-
     on( setPage, (state, { page }) => ({
         ...state,
         page

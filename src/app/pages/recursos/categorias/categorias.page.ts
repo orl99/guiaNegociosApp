@@ -17,6 +17,9 @@ import { environment } from 'src/environments/environment';
 
 // Posts Favoritos
 import { FavoritosService } from '../../../services/favoritos.service';
+import { AppState } from '../../../store/app.reducers';
+import { Store } from '@ngrx/store';
+import { setPage } from '../../../store/actions/menu.actions';
 
 
 @Component({
@@ -47,6 +50,7 @@ export class CategoriasPage implements OnInit {
     private router: Router,
     private plt: Platform,
     private favService: FavoritosService,
+    private store: Store<AppState>
     ) {
     if (plt.is('hybrid') && plt.is('android')) {
       AdMob.showBanner(this.AdMobOptionsAndroid);
@@ -71,6 +75,8 @@ export class CategoriasPage implements OnInit {
 }
 
   async ngOnInit() {
+    this.store.dispatch( setPage({ page: 'Recursos'}) );
+
     const res = await this.wpService.getCategories('resource-categories');
     // console.log('res', res);
     this.categories = res;

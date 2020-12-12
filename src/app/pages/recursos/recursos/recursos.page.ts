@@ -8,9 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 // Models
 import { BasePostEmbeb, PostFavorito } from 'src/app/models/post.interface';
 import { Subscription } from 'rxjs/internal/Subscription';
+
 import { FavoritosService } from 'src/app/services/favoritos.service';
+
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducers';
+import { setPage } from 'src/app/store/actions/menu.actions';
+
 @Component({
   selector: 'app-recursos',
   templateUrl: './recursos.page.html',
@@ -48,6 +52,8 @@ export class RecursosPage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.store.dispatch( setPage({ page: 'Recursos'}) );
+
     const response = await this.wpservce.getCustomPostType('recursos', this.category, this.pageNum);
     // console.log('res', response);
     this.allPosts = response;

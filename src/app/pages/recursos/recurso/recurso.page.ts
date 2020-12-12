@@ -11,6 +11,7 @@ import { ToastController } from '@ionic/angular';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducers';
+import { setPage } from '../../../store/actions/menu.actions';
 
 const { AdMob } = Plugins;
 
@@ -45,6 +46,8 @@ export class RecursoPage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.store.dispatch( setPage({ page: 'Recursos'}) );
+
     const response = await this.wpService.getPost(this.postId);
     // console.log('Response', response);
     this.mainImage = response.featured_image.large;

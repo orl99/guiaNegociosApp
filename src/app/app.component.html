@@ -13,9 +13,9 @@
             <ion-content class="app-menu-lateral">
                 <ion-list id="inbox-list">
                     <ion-menu-toggle auto-hide="false" >
-                        <ion-item *ngFor="let p of appPages; let i = index" (click)="selectedIndex = i" 
+                        <ion-item *ngFor="let p of appPages; let i = index" 
                             [routerLink]="[p.url]" routerDirection="root" routerLinkActive="active" 
-                            lines="none" detail="false"  [class.selected]="selectedIndex == i">
+                            lines="none" detail="false"  [class.selected]="p.title == page">
                                 <!-- <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i"></ion-item> -->
                                 <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                                 <ion-label>{{ p.title }}</ion-label>
@@ -28,7 +28,7 @@
                         <ion-label *ngIf="!darkMode">Act. Dark Mode</ion-label>
 
                         <ion-icon  *ngIf="darkMode" slot="start" name="sunny"></ion-icon>
-                        <ion-label *ngIf="darkMode">Act. light Mode</ion-label>
+                        <ion-label *ngIf="darkMode">Act. Light Mode</ion-label>
 
                     </ion-item>
                 </ion-list>

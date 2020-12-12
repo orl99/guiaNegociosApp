@@ -19,6 +19,7 @@ import { PostFavorito } from '../../models/post.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
 import { Subscription } from 'rxjs';
+import { setPage } from '../../store/actions/menu.actions';
 
 
 @Component({
@@ -41,8 +42,10 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
 
   favoritos: PostFavorito[] = [];
   favoritosSubs: Subscription;
+  
   // Dom elements
   @ViewChild('infiLoadingEl', { static: false }) infiLoadingEl: ElementRef;
+
   constructor(private wpService: WordpressApiService,
               private route: ActivatedRoute,
               private router: Router,
@@ -63,6 +66,8 @@ export class PostPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.store.dispatch( setPage( {page: 'Guias'}) );
+
     // Get tags by category
     const responseTags = await this.wpService.getTagsByCat(this.category);
     // console.log('Tags', responseTags);

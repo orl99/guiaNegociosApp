@@ -12,6 +12,9 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { FavoritosService } from './services/favoritos.service';
 
+import { Store } from '@ngrx/store';
+import { AppState } from './store/app.reducers';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -20,6 +23,8 @@ import { FavoritosService } from './services/favoritos.service';
 export class AppComponent implements OnInit {
   public selectedIndex = 1;
   public versionName: string;
+  public page: string;
+
   public appPages = [
     {
       title: 'Guias',
@@ -54,6 +59,7 @@ export class AppComponent implements OnInit {
     private FB: Facebook,
     private darkModeService: DarkModeService,
     private favService: FavoritosService,
+    private store: Store<AppState>
   ) {
     this.initializeApp();
     AdMob.initialize('ca-app-pub-8693507653531046~7933897666');
@@ -75,7 +81,16 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    await this.darkModeService.loadDarkMode();
+    this.darkMode = await this.darkModeService.getDarkModeStatus();
+
+    this.store.select('page').subscribe( ({page}) => {
+      console.log( 'Store Page State: ', page) ;
+      this.page = page;
+    });
+
     this.favService.cargarFavoritos();
   }
 
@@ -92,7 +107,8 @@ export class AppComponent implements OnInit {
 
   cambioTheme() {
     this.darkMode = !this.darkMode;
-    document.body.classList.toggle('dark');
+    // console.log('dark Mode: ', this.darkMode );
     this.darkModeService.setDarkMode( this.darkMode );
   }
+
 }
