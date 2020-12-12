@@ -54,6 +54,7 @@ export class CategoriesPage implements OnInit, OnDestroy {
   };
 
   limitOfCategories: number = 8;
+  infinityLoadingFlag: boolean = true;
 
   constructor(
       private wpService: WordpressApiService,
@@ -96,10 +97,13 @@ export class CategoriesPage implements OnInit, OnDestroy {
     this.categoriesToShow = res;
     this.categories = this.categoriesToShow.slice(0, this.limitOfCategories );
 
-    const a = [0,1,2,3,4,5,6,7];
-    const b = a.slice(0,20);
-    console.log('a', a)
-    console.log('a', b)
+    if ( this.categories.length < this.limitOfCategories ) {
+      this.infinityLoadingFlag = false;
+    }
+    else {
+      this.infinityLoadingFlag = true;
+    }
+
     
   }
 
@@ -109,6 +113,10 @@ export class CategoriesPage implements OnInit, OnDestroy {
 
     this.limitOfCategories += 8;
     this.categories = this.categoriesToShow.slice(0, this.limitOfCategories );
+    
+    if ( this.categories.length >= this.categoriesToShow.length ) {
+      this.infinityLoadingFlag = false;
+    }
 
   }
 

@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll [disabled]="!infinityLoadingFlag" threshold="150px" (ionInfinite)="loadData($event)">
         <ion-infinite-scroll-content
             loadingSpinner="crescent"
             loadingText="Cargando...">
